@@ -1,0 +1,14 @@
+{
+  "name": "The Green Web",
+  "version": "0.1",
+  "description": "Automatically check the sustainability of a website with The Green Web add-on.",
+  "background_page": "background.html",
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "The Green Web"
+  },
+  "permissions": [
+    "http://api.cleanbits.net/",
+     "tabs"
+  ]
+}
