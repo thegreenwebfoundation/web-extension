@@ -134,6 +134,7 @@
 		"http://*.google.com.om/*",
 		"http://*.google.kz/*",
 		"http://*.google.co.uz/*",
+                "http://search.yahoo.com/*",
     "http://api.cleanbits.net/",
      "tabs"
   ],
@@ -267,6 +268,10 @@
 		"http://*.google.kz/*",
 		"http://*.google.co.uz/*"],
       "js": ["jquery-1.5.min.js", "thegreenweb-utils.js","google.js"]
+    },
+    {
+      "matches": ["http://search.yahoo.com/*"],
+      "js": ["jquery-1.5.min.js", "thegreenweb-utils.js","yahoo.js"]
     }
   ]
 }

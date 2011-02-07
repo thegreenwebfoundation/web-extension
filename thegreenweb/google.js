@@ -41,7 +41,7 @@ $(document).ready(function() {
             $('.Cleanbits').remove();
 			
             // Add cleanbits link to each google listing
-            $('.tl').prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '</span>');
+            $('.tl').prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
 			
             // Check urls to see if search results are green/grey
             var locs = new Array();
