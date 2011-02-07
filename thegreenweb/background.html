@@ -1,7 +1,23 @@
 <html>
     <head><title></title>
-<script>
-  chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+        <script src="/thegreenweb-utils.js"></script>
+        <script>
+/**
+ * On request, send the data to the cleanbits api
+ */
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+    if (request.locs){
+        doSearchRequest(request.locs,sender.tab);
+        sendResponse({});
+    }else
+      sendResponse({}); // snub them.
+  });
+
+/**
+ * Attach the normal pageAction to the tabs
+ */
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     url = tab.url;
     var prot = url.substring(0,6);
     if(prot == 'chrome'){
@@ -24,6 +40,23 @@
     }
     doRequest(url,tabId);
   });
+
+/**
+ * Do the search request
+ */
+  function doSearchRequest(data,tab)
+  {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://api.cleanbits.net/json-multi.php?data="+JSON.stringify(data), true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            var resp = JSON.parse(xhr.responseText);
+            chrome.tabs.sendRequest(tab.id, {data: resp}, function(response) {
+            });
+        }
+    }
+    xhr.send();
+  }
 
 /**
  * Do the request
@@ -66,47 +99,7 @@
          chrome.pageAction.setIcon({'tabId' : tabId, 'path' : 'images/grey20x20.gif'});
          chrome.pageAction.show(tabId);
     }
-  }
-
-  /**
- * Get the url from the given tab
- */
-  function getUrl(loc)
-{
-    loc = this.stripProtocolFromUrl(loc);
-    if(loc == false){
-        return false;
-    }
-    loc = this.stripPageFromUrl(loc);
-    return loc;
-}
-
-/**
- * Strip the protocol from the url
- */
-function stripProtocolFromUrl(loc)
-{
-    var prot = loc.substring(0,5);
-    if(prot == 'http:'){
-        loc = loc.substring(7);
-    }else if(prot == 'https'){
-        loc = loc.substring(8);
-    }else{
-        return false;
-    }
-    return loc;
-}
-
-/**
- * Strip the page from the url
- */
-function stripPageFromUrl(loc)
-{
-    var temp = new Array();
-    temp = loc.split('/');
-    loc = temp[0];
-    return loc;
-}
+  }  
 </script>
 </head>
 <body>
@@ -121,7 +114,6 @@ function stripPageFromUrl(loc)
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
      })();
    </script>
-
     <div id="resp"></div>
     <div id="req"></div>
     <div id="log"></div>
