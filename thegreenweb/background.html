@@ -83,22 +83,11 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
  */
   function showIcon(resp,tabId)
   {
-    //document.getElementById("log").innerText = 'showicon called with :' + resp.green + resp.url;
-    if(resp.green){
-         chrome.pageAction.setIcon({'tabId' : tabId, 'path' : 'images/green20x20.gif'});
-         if(resp.hostedby){
-            chrome.pageAction.setTitle({'tabId' : tabId, 'title' : 'Sustainably hosted by ' + resp.hostedby});
-         }else{
-            chrome.pageAction.setTitle({'tabId' : tabId, 'title' : 'is made sustainable through Cleanbits'});
-         }
-         chrome.pageAction.show(tabId);
-    }else{
-        if(resp.data == false){
-            chrome.pageAction.setTitle({'tabId' : tabId, 'title' : 'No data available yet for this country domain. Wanna help? Contact us through www.cleanbits.net'});
-        }
-         chrome.pageAction.setIcon({'tabId' : tabId, 'path' : 'images/grey20x20.gif'});
-         chrome.pageAction.show(tabId);
-    }
+      icon = getImagePath(getIcon(resp));
+      title = getTitle(resp);
+      chrome.pageAction.setIcon({'tabId' : tabId, 'path' : icon});
+      chrome.pageAction.setTitle({'tabId' : tabId, 'title' : title});
+      chrome.pageAction.show(tabId);
   }  
 </script>
 </head>

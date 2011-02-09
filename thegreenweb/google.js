@@ -14,11 +14,7 @@ chrome.extension.onRequest.addListener(
             data = request.data;
             $("#ires li").each(function (i) {
                 if(data[i]){
-                    if(data[i].green) {
-                        $(this).find('span .Cleanbits').first().html(getLinkImage('green') + '&nbsp;');
-                    }else{
-                        $(this).find('span .Cleanbits').first().html(getLinkImage('grey') + '&nbsp;');
-                    }
+                    $(this).find('span .Cleanbits').first().html(getResult(data[i]));
                 }
             });
             sendResponse({});

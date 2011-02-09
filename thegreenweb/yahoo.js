@@ -14,11 +14,7 @@ chrome.extension.onRequest.addListener(
             data = request.data;
             $("#web ol > li").each(function (i) {
                 if(data[i]){
-                    if(data[i].green) {
-                        $(this).find('.Cleanbits').first().html(getLinkImage('green') + '&nbsp;');
-                    }else{
-                        $(this).find('.Cleanbits').first().html(getLinkImage('grey') + '&nbsp;');
-                    }
+                    $(this).find('.Cleanbits').first().html(getResult(data[i]));
                 }
             });
             sendResponse({});
