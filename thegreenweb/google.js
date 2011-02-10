@@ -27,7 +27,7 @@ chrome.extension.onRequest.addListener(
  * If document is ready, find the urls to check
  */
 $(document).ready(function() {
-    $('#res').append("<p id='thegreenweb'>" + getLinkImage('green') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
+    $('#res').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
 
     (function checkLoop() {
         // Check if search results have 'cleanbits' link

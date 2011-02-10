@@ -1,5 +1,5 @@
 /* 
- * Yahoo search pagemod functions
+ * Bing search pagemod functions
  * 
  * @author Arend-Jan Tetteroo <aj@cleanbits.net>
  * @copyright Cleanbits 2010-2011
@@ -12,7 +12,7 @@ chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
-            $("#web ol > li").each(function (i) {
+            $("#results ul > li").each(function (i) {
                 if(data[i]){
                     $(this).find('.Cleanbits').first().html(getResult(data[i]));
                 }
@@ -27,11 +27,11 @@ chrome.extension.onRequest.addListener(
  * If document is ready, find the urls to check
  */
 $(document).ready(function() {
-    $('#ft').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
+    $('#results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
     var locs = new Array();
-    if ( $("#web ol > li").length > 0 ) {
-         $("#web ol > li").each(function (i) {
-             $(this).find('.url').first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
+    if ( $("#results ul > li").length > 0 ) {
+         $("#results ul > li").each(function (i) {
+             $(this).find('a').first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
              var loc = $(this).find('a').first().attr('href');
              locs[i] = getUrl(loc);
          });

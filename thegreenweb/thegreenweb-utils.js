@@ -24,6 +24,9 @@ function getUrl(loc)
  */
 function stripProtocolFromUrl(loc)
 {
+    if(loc == undefined){
+        return false;
+    }
     var prot = loc.substring(0,5);
     if(prot == 'http:'){
         loc = loc.substring(7);
