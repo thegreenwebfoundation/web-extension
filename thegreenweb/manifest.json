@@ -1,9 +1,15 @@
 {
   "name": "The Green Web",
-  "version": "0.2.3",
-  "description": "Automatically check the sustainability of a website with The Green Web add-on. This add-on also adds automatic checking of search results by showing a green or grey icon before the results. Google, Bing and Yahoo Search are supported",
+  "version": "0.2.4",
+  "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "update_url": "http://api.cleanbits.net/chrome/updates.xml",
   "background_page": "background.html",
+  "icons": {
+    "16" : "/icons/16.gif",
+    "48" : "/icons/48.gif",
+    "128": "/icons/128.gif"
+  },
+  "homepage_url": "http://www.cleanbits.net/add-on",
   "page_action": {
     "default_icon": "icon.png",
     "default_title": "The Green Web"
