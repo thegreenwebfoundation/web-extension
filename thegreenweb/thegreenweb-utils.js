@@ -73,24 +73,17 @@ function getImage(color)
  */
 function getImagePath(file)
 {
-    cache = window.localStorage.getItem('icons' + file);
-    if(cache != null){
-        console.log(cache + ' from cache');
-        return cache;
-    }
-    var path = "/images/" + file + "20x20.gif";
-    var iconPath = chrome.extension.getURL(path);
-    window.localStorage.setItem('icons'+ file,iconPath);
+    var icons = new Array();
+    icons['green']         = chrome.extension.getURL("/images/green20x20.gif");
+    icons['grey']          = chrome.extension.getURL("/images/grey20x20.gif");
+    icons['greenquestion'] = chrome.extension.getURL("/images/greenquestion20x20.gif");
+    icons['greenfan']      = chrome.extension.getURL("/images/greenfan20x20.gif");
 
-    // Check if the icon exists locally, otherwise use the normal url until extension is updated
-    myImage = document.createElement('img');
-    //myImage.src = iconPath;    
-    $(myImage).attr("src", iconPath);
-    $(myImage).error(function(){
-       iconPath = 'http://images.cleanbits.net/icons/' + file + "20x20.gif";
-       window.localStorage.setItem('icons' + file,iconPath);
-       console.log(iconPath + ' into cache');
-    });    
+     if(icons[file]){
+        return icons[file];
+    }
+
+    iconPath = 'http://images.cleanbits.net/icons/' + file + "20x20.gif";
     return iconPath;
 }
 

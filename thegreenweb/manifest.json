@@ -1,6 +1,6 @@
 {
   "name": "The Green Web",
-  "version": "0.5",
+  "version": "0.5.1",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background_page": "background.html",
   "icons": {
