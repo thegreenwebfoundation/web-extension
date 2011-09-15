@@ -2,7 +2,7 @@
  * Google search pagemod functions
  * 
  * @author Arend-Jan Tetteroo <aj@cleanbits.net>
- * @copyright Cleanbits 2010-2011
+ * @copyright Cleanbits/The Green Web Foundation 2010-2011
  */
 
 /**
@@ -12,11 +12,12 @@ chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
-            $("#ires li").each(function (i) {
+            var links = $('span .Cleanbits');
+            $(links).each(function (i) {            
                 if(data[i]){
-                    $(this).find('span .Cleanbits').first().html(getResult(data[i]));
+                    $(this).html(getResult(data[i]));
                     if(data[i].poweredby) {
-                        $(this).find('.Cleanbits').next().css('background-color', '#DBFA7F');
+                        $(this).next().css('background-color', '#DBFA7F');
                     }else{
                     }
                 }
@@ -45,7 +46,8 @@ $(document).ready(function() {
 			
             // Check urls to see if search results are green/grey
             var locs = new Array();
-            $("#ires li").each(function (i) {
+            var links = $('span .Cleanbits').next();
+            $(links).each(function (i) {
                 var loc = $(this).find('a').first().attr('href');
                 locs[i] = getUrl(loc);
             });
@@ -53,8 +55,7 @@ $(document).ready(function() {
                 chrome.extension.sendRequest({
                     locs: locs
                 }, function(response) {
-                    /*console.log(response.farewell);*/
-                    });
+                });
             }
         }
         setTimeout(checkLoop, 100);
