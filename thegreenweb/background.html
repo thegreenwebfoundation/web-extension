@@ -47,7 +47,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   function doSearchRequest(data,tab)
   {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://api.cleanbits.net/json-multi.php?data="+JSON.stringify(data), true);
+    xhr.open("GET", "http://api.thegreenwebfoundation.org/json-multi.php?data="+JSON.stringify(data), true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             var resp = JSON.parse(xhr.responseText);
@@ -65,7 +65,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   {
     //document.getElementById("req").innerText = url;
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://api.cleanbits.net/json-multi.php?url="+url, true);
+    xhr.open("GET", "http://api.thegreenwebfoundation.org/json-multi.php?url="+url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             //document.getElementById("resp").innerText = xhr.responseText;

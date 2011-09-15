@@ -1,6 +1,7 @@
 {
+"update_url":"http://clients2.google.com/service/update2/crx",
   "name": "The Green Web",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background_page": "background.html",
   "icons": {
@@ -8,7 +9,7 @@
     "48" : "/icons/48.gif",
     "128": "/icons/128.gif"
   },
-  "homepage_url": "http://www.cleanbits.net/add-on",
+  "homepage_url": "http://www.thegreenwebfoundation.org/add-on",
   "page_action": {
     "default_icon": "icon.png",
     "default_title": "The Green Web"
@@ -142,7 +143,7 @@
 		"http://*.google.co.uz/*",
                 "http://search.yahoo.com/*",
                 "http://www.bing.com/*",
-    "http://api.cleanbits.net/",
+    "http://api.thegreenwebfoundation.org/",
      "tabs"
   ],
   "content_scripts": [
@@ -274,15 +275,15 @@
 		"http://*.google.com.om/*",
 		"http://*.google.kz/*",
 		"http://*.google.co.uz/*"],
-      "js": ["jquery-1.5.min.js", "thegreenweb-utils.js","google.js"]
+      "js": ["jquery-1.6.2.min.js", "thegreenweb-utils.js","google.js"]
     },
     {
       "matches": ["http://search.yahoo.com/*"],
-      "js": ["jquery-1.5.min.js", "thegreenweb-utils.js","yahoo.js"]
+      "js": ["jquery-1.6.2.min.js", "thegreenweb-utils.js","yahoo.js"]
     },
     {
       "matches": ["http://www.bing.com/*"],
-      "js": ["jquery-1.5.min.js", "thegreenweb-utils.js","bing.js"]
+      "js": ["jquery-1.6.2.min.js", "thegreenweb-utils.js","bing.js"]
     }
   ]
 }
