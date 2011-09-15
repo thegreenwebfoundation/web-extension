@@ -78,6 +78,7 @@ function getImagePath(file)
     icons['grey']          = chrome.extension.getURL("/images/grey20x20.gif");
     icons['greenquestion'] = chrome.extension.getURL("/images/greenquestion20x20.gif");
     icons['greenfan']      = chrome.extension.getURL("/images/greenfan20x20.gif");
+    icons['greenhouse']      = chrome.extension.getURL("/images/greenhouse20x20.gif");
 
      if(icons[file]){
         return icons[file];
@@ -94,7 +95,21 @@ function getResult(data)
 {
     icon = getIcon(data);
     title = getTitle(data);
-    return getLinkImage(icon,title) + '&nbsp;';
+    return getLinkImage(icon,title) + getPoweredResult(data) + '&nbsp;';
+}
+
+/**
+ * Get the resulting image from the data
+ */
+function getPoweredResult(data)
+{
+    if(data.poweredby) {
+        icon = 'greenhouse';
+        title = data.poweredby.organisatie + ' uses green power';
+        return getLinkImage(icon,title) + '&nbsp;';
+    }else{
+        return '';
+    }
 }
 
 /**
@@ -108,6 +123,8 @@ function getIcon(data)
         if(data.icon) {
             icon = data.icon;
         }
+    }else if(data.data == false){
+        icon = 'greenquestion';
     }
     return icon;
 }

@@ -15,6 +15,10 @@ chrome.extension.onRequest.addListener(
             $("#ires li").each(function (i) {
                 if(data[i]){
                     $(this).find('span .Cleanbits').first().html(getResult(data[i]));
+                    if(data[i].poweredby) {
+                        $(this).find('.Cleanbits').next().css('background-color', '#DBFA7F');
+                    }else{
+                    }
                 }
             });
             sendResponse({});

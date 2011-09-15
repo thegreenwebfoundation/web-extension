@@ -15,6 +15,9 @@ chrome.extension.onRequest.addListener(
             $("#web ol > li").each(function (i) {
                 if(data[i]){
                     $(this).find('.Cleanbits').first().html(getResult(data[i]));
+                    if(data[i].poweredby) {
+                       $(this).find('.Cleanbits').parent().css('background', '#DBFA7F');
+                    }
                 }
             });
             sendResponse({});
@@ -31,7 +34,7 @@ $(document).ready(function() {
     var locs = new Array();
     if ( $("#web ol > li").length > 0 ) {
          $("#web ol > li").each(function (i) {
-             $(this).find('.url').first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
+             $(this).find('.url').parent().first().children().first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
              var loc = $(this).find('a').first().attr('href');
              locs[i] = getUrl(loc);
          });

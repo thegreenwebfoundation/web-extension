@@ -15,6 +15,9 @@ chrome.extension.onRequest.addListener(
             $("#results ul > li").each(function (i) {
                 if(data[i]){
                     $(this).find('.Cleanbits').first().html(getResult(data[i]));
+                    if(data[i].poweredby) {
+                       $(this).find('.Cleanbits').parent().parent().css('background', '#DBFA7F');
+                    }
                 }
             });
             sendResponse({});

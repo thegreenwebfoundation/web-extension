@@ -47,6 +47,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   function doSearchRequest(data,tab)
   {
     var xhr = new XMLHttpRequest();
+    console.log("http://api.thegreenwebfoundation.org/json-multi.php?data="+JSON.stringify(data));
     xhr.open("GET", "http://api.thegreenwebfoundation.org/json-multi.php?data="+JSON.stringify(data), true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
