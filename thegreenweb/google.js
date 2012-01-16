@@ -1,8 +1,8 @@
-/* 
+/*
  * Google search pagemod functions
- * 
+ *
  * @author Arend-Jan Tetteroo <aj@cleanbits.net>
- * @copyright Cleanbits/The Green Web Foundation 2010-2011
+ * @copyright Cleanbits/The Green Web Foundation 2010-2012
  */
 
 /**
@@ -13,7 +13,7 @@ chrome.extension.onRequest.addListener(
         if (request.data){
             data = request.data;
             var links = $('.Cleanbits');
-            $(links).each(function (i) {            
+            $(links).each(function (i) {
                 if(data[i]){
                     $(this).html(getResult(data[i]));
                     if(data[i].poweredby) {
@@ -37,10 +37,10 @@ $(document).ready(function() {
     (function checkLoop() {
         // Check if search results have 'cleanbits' link
         if ( $('.Cleanbits').length != $('#res h3 > a').length) {
-			
+
             // Remove all cleanbits links
             $('.Cleanbits').remove();
-			
+
             // Check urls to see if search results are green/grey
             var locs = new Array();
             var links = $('#res h3 > a');

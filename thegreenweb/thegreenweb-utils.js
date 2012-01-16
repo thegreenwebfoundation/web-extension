@@ -2,7 +2,7 @@
  * Utilities for the greenweb add-on
  *
  * @author Arend-Jan Tetteroo <aj@cleanbits.net>
- * @copyright Cleanbits BV 2010-2011
+ * @copyright Cleanbits/The Green Web Foundation 2010-2012
  */
 
 /**
@@ -15,6 +15,7 @@ function getUrl(loc)
         return false;
     }
     loc = this.stripPageFromUrl(loc);
+    loc = this.stripPortFromUrl(loc);
     return loc;
 }
 
@@ -45,6 +46,17 @@ function stripPageFromUrl(loc)
 {
     var temp = new Array();
     temp = loc.split('/');
+    loc = temp[0];
+    return loc;
+}
+
+/**
+ * Only use the domain.tld, not the port
+ */
+function stripPortFromUrl(loc)
+{
+    var temp = new Array();
+    temp = loc.split(':');
     loc = temp[0];
     return loc;
 }

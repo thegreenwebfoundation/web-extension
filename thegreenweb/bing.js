@@ -1,8 +1,8 @@
-/* 
+/*
  * Bing search pagemod functions
- * 
+ *
  * @author Arend-Jan Tetteroo <aj@cleanbits.net>
- * @copyright Cleanbits 2010-2011
+ * @copyright Cleanbits/The Green Web Foundation 2010-2012
  */
 
 /**
@@ -44,4 +44,4 @@ $(document).ready(function() {
             /*console.log(response.farewell);*/
         });
     }
-});   
+});
