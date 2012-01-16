@@ -36,14 +36,14 @@ $(document).ready(function() {
 
     (function checkLoop() {
         // Check if search results have 'cleanbits' link
-        if ( $('.Cleanbits').length != $('#res h3 > a').length) {
+        if ( $('.Cleanbits').length != $('#res h3 > a.l').length) {
 
             // Remove all cleanbits links
             $('.Cleanbits').remove();
 
             // Check urls to see if search results are green/grey
             var locs = new Array();
-            var links = $('#res h3 > a');
+            var links = $('#res h3 > a.l');
             $(links).each(function (i) {
                 // Add cleanbits link to each google listing
                 $(this).prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
