@@ -41,7 +41,6 @@ $(document).ready(function() {
     }
     if(locs.length > 0) {
         chrome.extension.sendRequest({locs: locs}, function(response) {
-            /*console.log(response.farewell);*/
         });
     }
 });
