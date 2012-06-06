@@ -1,7 +1,7 @@
 {
   "update_url":"http://clients2.google.com/service/update2/crx",
   "name": "The Green Web",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background_page": "background.html",
   "icons": {
@@ -147,19 +147,19 @@
 			"*://*.google.kz/*",
 			"*://*.google.co.uz/*"
 				],
-      "js": ["jquery-1.7.1.min.js", "thegreenweb-utils.js","google.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","google.js"]
     },
     {
       "matches": ["*://search.yahoo.com/*"],
-      "js": ["jquery-1.7.1.min.js", "thegreenweb-utils.js","yahoo.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","yahoo.js"]
     },
     {
       "matches": ["*://www.bing.com/*"],
-      "js": ["jquery-1.7.1.min.js", "thegreenweb-utils.js","bing.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","bing.js"]
     },
     {
       "matches": ["*://ecosia.org/*"],
-      "js": ["jquery-1.7.1.min.js", "thegreenweb-utils.js","ecosia.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","ecosia.js"]
     }
   ]
 }

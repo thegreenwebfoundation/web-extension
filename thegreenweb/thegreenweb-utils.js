@@ -66,7 +66,7 @@ function stripPortFromUrl(loc)
  */
 function getLinkImage(color,tooltip)
 {
-    var output = "<a href='http://www.cleanbits.net' target='_blank' title='" + tooltip + "'>";
+    var output = "<a href='http://www.thegreenwebfoundation.org/add-ons/' target='_blank' title='" + tooltip + "'>";
     output += getImage(color) + "</a>";
     return output;
 }
