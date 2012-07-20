@@ -15,10 +15,10 @@ function save_options() {
   chrome.storage.local.set({'tgwf_search_disabled' : value},function() {
       // Update status to let user know options were saved.
     var status = document.getElementById("status");
-    status.innerHTML = "Options Saved.";
+    status.innerHTML = "<div class=\"alert alert-success\">Options Saved.</div>";
     setTimeout(function() {
       status.innerHTML = "";
-    }, 750);    
+    }, 1500);    
   })  
   
 }
@@ -31,7 +31,6 @@ function save_options() {
 function restore_options() {
   chrome.storage.local.get("tgwf_search_disabled", function(items) {
     var disable = items.tgwf_search_disabled;
-    console.log(disable);
     // 1 is disabled, 0 or not set is enabled
     if(disable == 1){
       $('#searchoff').attr('checked','checked');

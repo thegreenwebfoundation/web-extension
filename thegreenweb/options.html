@@ -1,17 +1,23 @@
 <html>
-<head><title>The Green Web Options</title></head>
-<script src="jquery-1.7.2.min.js"></script>
-<script src='options.js'></script>
+<head>
+	<title>The Green Web Options</title>
+	<link rel="stylesheet" href='/bootstrap/css/bootstrap.css'>
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src='options.js'></script>
+</head>
 <body>
-  <div id='status'></div>
-  <div id='search'>
-Enable/Disable The Green Web Search:<br/>
-<input type='radio' name='search' id='searchon' value='0' checked='checked' />Enabled<br/>
-<input type='radio' name='search' id='searchoff' value='1'/>Disabled<br/>
-</div>
-<br>
-<button>Save</button>
-
-<p>Reload search pages for the setting to take effect. </p>
+	<div class="container">
+		<h1><img src='/images/green20x20.gif'/> The Green Web Chrome Extension</h1>
+	  	<div id='status'></div>
+	  		<div id='search' class="well">
+			<h3>The Green Web Search:</h3>
+			<p>The Green Web Search adds the different green web icons to search results for the Google, Yahoo, Bing and Ecosia search engines. <br/> Check out the <a href='http://www.thegreenwebfoundation.org/add-ons/'>addonpage</a> for information on the different icons and how it works.</p>
+			<input type='radio' name='search' id='searchon' value='0' checked='checked' />Enabled<br/>
+			<input type='radio' name='search' id='searchoff' value='1'/>Disabled<br/>
+			</div>
+			<div class='alert'>Reload search pages for this setting to take effect. </div>
+			<button class='btn btn-primary'>Save</button>
+	
+	</div>
 </body>
 </html>
