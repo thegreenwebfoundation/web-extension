@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "update_url":"http://clients2.google.com/service/update2/crx",
   "name": "The Green Web",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
     "scripts": ["background.js","thegreenweb-utils.js","tracker.js"]
@@ -171,6 +171,10 @@
     {
       "matches": ["*://ecosia.org/*"],
       "js": ["jquery-1.8.2.min.js", "thegreenweb-utils.js","search-ecosia.js"]
+    },
+    {
+      "matches": ["http://*/*"],
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-all.js"]
     }
   ]
 }

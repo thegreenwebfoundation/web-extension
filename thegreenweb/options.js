@@ -12,7 +12,14 @@ function save_options() {
     value = 1;
   }
 
-  chrome.storage.local.set({'tgwf_search_disabled' : value},function() {
+  search = $('#allon').attr('checked');
+  if(search == 'checked'){
+    allvalue = 0;
+  }else{
+    allvalue = 1;
+  }
+
+  chrome.storage.local.set( {'tgwf_search_disabled' : value, 'tgwf_all_disabled': allvalue} , function() {
       // Update status to let user know options were saved.
     var status = document.getElementById("status");
     status.innerHTML = "<div class=\"alert alert-success\">Options Saved.</div>";
@@ -36,6 +43,15 @@ function restore_options() {
       $('#searchoff').attr('checked','checked');
     } else {
       $('#searchon').attr('checked','checked');
+    }
+  });
+  chrome.storage.local.get("tgwf_all_disabled", function(items) {
+    var disable = items.tgwf_all_disabled;
+    // 1 is disabled, 0 or not set is enabled
+    if(disable == 1){
+      $('#alloff').attr('checked','checked');
+    } else {
+      $('#allon').attr('checked','checked');
     }
   });
 }
