@@ -32,31 +32,37 @@ chrome.extension.onRequest.addListener(
  * If document is ready, find the urls to check
  */
 $(document).ready(function() {
-    $('#res').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
-
-    (function checkLoop() {
-        // Check if search results have 'cleanbits' link
-        if ( $('.Cleanbits').length != $('#res h3 > a.l').length) {
-
-            // Remove all cleanbits links
-            $('.Cleanbits').remove();
-
-            // Check urls to see if search results are green/grey
-            var locs = new Array();
-            var links = $('#res h3 > a.l');
-            $(links).each(function (i) {
-                // Add cleanbits link to each google listing
-                $(this).prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
-                var loc = $(this).attr('href');
-                locs[i] = getUrl(loc);
-            });
-            if(locs.length > 6) {
-                chrome.extension.sendRequest({
-                    locs: locs
-                }, function(response) {
-                });
-            }
+    chrome.storage.local.get("tgwf_search_disabled", function(items) {
+        if(items.tgwf_search_disabled == 1){
+          // Green web search is disabled, return
+          return;
         }
-        setTimeout(checkLoop, 100);
-    })();
+        $('#res').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
+
+        (function checkLoop() {
+            // Check if search results have 'cleanbits' link
+            if ( $('.Cleanbits').length != $('#res h3 > a.l').length) {
+
+                // Remove all cleanbits links
+                $('.Cleanbits').remove();
+
+                // Check urls to see if search results are green/grey
+                var locs = new Array();
+                var links = $('#res h3 > a.l');
+                $(links).each(function (i) {
+                    // Add cleanbits link to each google listing
+                    $(this).prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
+                    var loc = $(this).attr('href');
+                    locs[i] = getUrl(loc);
+                });
+                if(locs.length > 6) {
+                    chrome.extension.sendRequest({
+                        locs: locs
+                    }, function(response) {
+                    });
+                }
+            }
+            setTimeout(checkLoop, 100);
+        })();
+    });
 });

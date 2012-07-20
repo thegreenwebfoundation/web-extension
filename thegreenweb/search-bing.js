@@ -30,17 +30,23 @@ chrome.extension.onRequest.addListener(
  * If document is ready, find the urls to check
  */
 $(document).ready(function() {
-    $('#results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
-    var locs = new Array();
-    if ( $("#results ul > li").length > 0 ) {
-         $("#results ul > li").each(function (i) {
-             $(this).find('a').first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
-             var loc = $(this).find('a').first().attr('href');
-             locs[i] = getUrl(loc);
-         });
-    }
-    if(locs.length > 0) {
-        chrome.extension.sendRequest({locs: locs}, function(response) {
-        });
-    }
+    chrome.storage.local.get("tgwf_search_disabled", function(items) {
+        if(items.tgwf_search_disabled == 1){
+          // Green web search is disabled, return
+          return;
+        }
+        $('#results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
+        var locs = new Array();
+        if ( $("#results ul > li").length > 0 ) {
+             $("#results ul > li").each(function (i) {
+                 $(this).find('a').first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
+                 var loc = $(this).find('a').first().attr('href');
+                 locs[i] = getUrl(loc);
+             });
+        }
+        if(locs.length > 0) {
+            chrome.extension.sendRequest({locs: locs}, function(response) {
+            });
+        }
+    });
 });
