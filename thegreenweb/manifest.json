@@ -2,11 +2,13 @@
   "manifest_version": 2,
   "update_url":"http://clients2.google.com/service/update2/crx",
   "name": "The Green Web",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
-    "page": "background.html"
-  },
+    "scripts": ["background.js","thegreenweb-utils.js","tracker.js"]
+  },  
+  "offline_enabled": false,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "icons": {
     "16" : "/icons/16.gif",
     "48" : "/icons/48.gif",
@@ -25,8 +27,8 @@
     "images/grey20x20.gif"    
   ],
   "permissions": [
-    		"http://api.thegreenwebfoundation.org/",
-     		"tabs"
+    	"http://api.thegreenwebfoundation.org/",
+     	"tabs"
   ],
   "content_scripts": [
    {
@@ -153,19 +155,19 @@
 			"*://*.google.kz/*",
 			"*://*.google.co.uz/*"
 				],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","google.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-google.js"]
     },
     {
       "matches": ["*://search.yahoo.com/*"],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","yahoo.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-yahoo.js"]
     },
     {
       "matches": ["*://www.bing.com/*"],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","bing.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-bing.js"]
     },
     {
       "matches": ["*://ecosia.org/*"],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","ecosia.js"]
+      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-ecosia.js"]
     }
   ]
 }
