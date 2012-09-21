@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "update_url":"http://clients2.google.com/service/update2/crx",
   "name": "The Green Web",
-  "version": "1.2.1",
+  "version": "1.2.5",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
     "scripts": ["background.js","thegreenweb-utils.js","tracker.js"]
@@ -174,7 +174,8 @@
     },
     {
       "matches": ["http://*/*"],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-all.js"]
+      "css": ["thegreenweb.css"],
+      "js": ["jquery-1.8.2.min.js", "thegreenweb-utils.js","search-all.js"]
     }
   ]
 }

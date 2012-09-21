@@ -1,0 +1,14 @@
+.tgwf_green {
+    text-decoration: underline;
+    color: green !important;
+    /*border-bottom:2px solid green;*/
+}
+
+/*a.tgwf_green {
+    text-decoration: none !important;
+}*/
+
+.tgwf_question {
+    text-decoration: underline;
+    color: grey !important;
+}
