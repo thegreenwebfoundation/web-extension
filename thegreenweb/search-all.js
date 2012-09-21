@@ -16,7 +16,10 @@ chrome.extension.onRequest.addListener(
             console.log($("a :not(.Cleanbits > a)").length);
             $("a").each(function (i) {
                 if(data[i]){
-                  //console.log(data[i]);
+                  if(data[i].green){
+                    $(this).addClass('tgwf_green');
+                  }
+                  console.log(data[i]);
                     $(this).find('.Cleanbits').first().html(getResult(data[i]));
                     if(data[i].poweredby) {
                        $(this).find('.Cleanbits').parent().css('background', '#DBFA7F');
