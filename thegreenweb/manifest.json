@@ -158,19 +158,19 @@
 			"*://*.google.kz/*",
 			"*://*.google.co.uz/*"
 				],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-google.js"]
+      "js": ["jquery-1.8.2.min.js", "thegreenweb-utils.js","search-google.js"]
     },
     {
       "matches": ["*://search.yahoo.com/*"],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-yahoo.js"]
+      "js": ["jquery-1.8.2.min.js", "thegreenweb-utils.js","search-yahoo.js"]
     },
     {
       "matches": ["*://www.bing.com/*"],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-bing.js"]
+      "js": ["jquery-1.8.2.min.js", "thegreenweb-utils.js","search-bing.js"]
     },
     {
       "matches": ["*://ecosia.org/*"],
-      "js": ["jquery-1.7.2.min.js", "thegreenweb-utils.js","search-ecosia.js"]
+      "js": ["jquery-1.8.2.min.js", "thegreenweb-utils.js","search-ecosia.js"]
     }
   ]
 }
