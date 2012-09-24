@@ -55,7 +55,7 @@ chrome.tabs.onUpdated.addListener(
 function doSearchRequest(data,tab)
 {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://api.thegreenwebfoundation.org/json-multi.php?data="+JSON.stringify(data), true);
+  xhr.open("GET", "http://api.thegreenwebfoundation.org/greencheckmulti/"+JSON.stringify(data), true);
   xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
           var resp = JSON.parse(xhr.responseText);
