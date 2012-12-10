@@ -40,7 +40,7 @@ $(document).ready(function() {
           return;
         }
         
-        $('#footer').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
+        $('#footer').append("<p id='thegreenweb' style='text-align:center;'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
 
         (function checkLoop() {
             // Check if search results have 'cleanbits' link
