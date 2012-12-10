@@ -13,17 +13,32 @@ chrome.extension.onRequest.addListener(
         if (request.data){
             data = request.data;
             $("#web ol > li").each(function (i) {
-                if(data[i]){
-                    $(this).find('.Cleanbits').first().html(getResult(data[i]));
-                    if(data[i].poweredby) {
-                       $(this).find('.Cleanbits').parent().css('background', '#DBFA7F');
-                    }
+              var loc = $(this).find('a').first().attr('href');
+              var strippedurl = getUrl(loc);
+                if (loc && strippedurl && data[strippedurl]) {
+                  $(this).find('.TGWF').first()
+                    .html(getResultNode(data[strippedurl]).append('&nbsp;'))
+                    .qtip({
+                      content: { 
+                        text: function(api) { 
+                          return getTitleWithLink(data[strippedurl]); 
+                          }
+                        },
+                      show: { delay: 700 },
+                      hide: { fixed:true,  delay:500 }
+                    });
+                  if(data[strippedurl].green){
+                    $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green'});
+                  } else {
+                    $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light'});
+                  }                
+                  if(data[strippedurl].poweredby) {
+                    $(this).find('.TGWF').parent().css('background', '#DBFA7F');
+                  } 
                 }
             });
-            sendResponse({});
-        }else{
-            sendResponse({}); // snub them.
         }
+        sendResponse({}); // snub them.
     });
 
 /**
@@ -36,12 +51,13 @@ $(document).ready(function() {
           return;
         }
         $('#ft').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
+        
         var locs = new Array();
         if ( $("#web ol > li").length > 0 ) {
              $("#web ol > li").each(function (i) {
-                 $(this).find('.url').parent().first().children().first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
+                 $(this).find('.url').parent().first().children().first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                  var loc = $(this).find('a').first().attr('href');
-                 locs[i] = getUrl(loc);
+                 locs[loc] = getUrl(loc);
              });
         }
         if(locs.length > 0) {

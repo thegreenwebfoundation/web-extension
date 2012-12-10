@@ -71,6 +71,14 @@ function getLinkImage(color,tooltip)
     return output;
 }
 
+function getLinkNode(color)
+{
+    var href = 'http://www.thegreenwebfoundation.org';
+    var a    = $("<a>", { href: href, class: 'TGWF-addon' })
+                 .append($('<img>', { src: getImagePath(color), style: 'width:16px; height:16px;border:none;'  } ));
+    return a;
+}
+
 /**
  * Get the image element based on the color
  */
@@ -78,6 +86,11 @@ function getImage(color)
 {
     var img = getImagePath(color);
     return  "<img style='width:16px; height:16px;border:none;' src='"+img+"'/>";
+}
+
+function getImageNode(color)
+{
+    return $('<img>', { style: 'width:16px; height:16px;border:none;', src: getImagePath(color)});
 }
 
 /**
@@ -108,6 +121,15 @@ function getResult(data)
     icon = getIcon(data);
     title = getTitle(data);
     return getLinkImage(icon,title) + getPoweredResult(data) + '&nbsp;';
+}
+
+/**
+ * Get the resulting image from the data as jquery dom node
+ */
+function getResultNode(data)
+{
+    icon = getIcon(data);
+    return getLinkNode(icon).append(getPoweredResult(data));
 }
 
 /**
@@ -161,5 +183,32 @@ function getTitle(data)
             title = data.url + ' is hosted grey';
         }
     }
+    return title;
+}
+
+/**
+ * Get the title based on the data
+ */
+function getTitleWithLink(data)
+{
+    if(data){
+        if (data.green) {
+            if (data.hostedby) {
+                title = data.url + ' ' + '<a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org/thegreenweb/#/providers/' + data.hostedbyid + '\'>' + ' is sustainably hosted by ' + ' ' + data.hostedby + '</a>';
+            } else {
+                title = data.url + ' ' + 'is made sustainable through Cleanbits';
+            }
+        } else {
+            if (data.data == false) {
+                // No data available, show help message
+                title = "No data available yet for this country domain. Wanna help? Contact us through "  + " <a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
+            } else {
+                // Data available, so show grey site
+                title = data.url + ' ' + ' is hosted grey';
+            }
+        }
+    }else{
+        title = '';
+    }    
     return title;
 }

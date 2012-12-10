@@ -13,23 +13,33 @@ chrome.extension.onRequest.addListener(
         if (request.data){
             data = request.data;
            
-            $("a").each(function (i) {
+            $("a").not('.TGWF-addon').each(function (i) {
               var loc = $(this).attr('href');
               var strippedurl = getUrl(loc);
               if (loc && strippedurl) {
                 if (data[strippedurl]) {
                   
                   if(data[strippedurl].green){
-                    $(this).addClass('tgwf_green');
+                   // $(this).addClass('tgwf_green');
+                    $(this)
+                    .addClass('tgwf_green')
+                    .qtip({
+                      content: { text: function(api) { 
+                        title = getTitleWithLink(data[strippedurl]); 
+                        return title;
+                      }},
+                      show: { delay: 700 },
+                      hide: { fixed:true,  delay:500 },
+                      style: {
+                        classes: 'qtip-green'
+                      }
+                    });
                   } else {
                     $(this).addClass('tgwf_grey');
                   }
                 }
               }
             });
-            sendResponse({});
-        }else{
-            sendResponse({}); // snub them.
         }
     });
 
@@ -50,7 +60,7 @@ function getUrlsAndSendRequest()
 {
   currenturl = getUrl(document.URL);
   var locs = new Object();
-  $("a").each(function (i) {
+  $("a").not('.TGWF-addon').each(function (i) {
        var loc = $(this).attr('href');
        var strippedurl = getUrl(loc);
        if (loc && strippedurl) {
