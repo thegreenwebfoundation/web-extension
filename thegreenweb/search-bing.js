@@ -13,17 +13,32 @@ chrome.extension.onRequest.addListener(
         if (request.data){
             data = request.data;
             $("#results ul > li").each(function (i) {
-                if(data[i]){
-                    $(this).find('.Cleanbits').first().html(getResult(data[i]));
-                    if(data[i].poweredby) {
-                       $(this).find('.Cleanbits').parent().parent().css('background', '#DBFA7F');
+                var loc = getUrl($(this).find('a').first().attr('href'));
+
+                if(data[loc]){
+                    $(this).find('.TGWF').first()
+                      .html(getResultNode(data[loc]).append('&nbsp;'))
+                      .qtip({
+                          content: { 
+                            text: function(api) { 
+                              return getTitleWithLink(data[loc]); 
+                              } 
+                            },
+                            show: { delay: 700 },
+                            hide: { fixed:true,  delay:500 }
+                      });
+                      if(data[loc].green){
+                        $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green'});
+                      } else {
+                        $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light'});
+                      }                
+                    if(data[loc].poweredby) {
+                       $(this).find('.TGWF').parent().parent().css('background', '#DBFA7F');
                     }
                 }
             });
-            sendResponse({});
-        }else{
-            sendResponse({}); // snub them.
         }
+        sendResponse({}); // snub them.
     });
 
 /**
@@ -36,15 +51,15 @@ $(document).ready(function() {
           return;
         }
         $('#results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
-        var locs = new Array();
+        var locs = new Object();
         if ( $("#results ul > li").length > 0 ) {
              $("#results ul > li").each(function (i) {
-                 $(this).find('a').first().prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
-                 var loc = $(this).find('a').first().attr('href');
-                 locs[i] = getUrl(loc);
+                 $(this).find('a').first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
+                 var loc = getUrl($(this).find('a').first().attr('href'));
+                 locs[loc] = loc;
              });
         }
-        if(locs.length > 0) {
+        if(Object.keys(locs).length > 0) {
             chrome.extension.sendRequest({locs: locs}, function(response) {
             });
         }

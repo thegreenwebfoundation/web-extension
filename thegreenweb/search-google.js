@@ -12,11 +12,13 @@ chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
-            var links = $('.Cleanbits');
+            
+            var links = $('.TGWF');
             $(links).each(function (i) {
-                if(data[i]){
-                    $(this).html(getResult(data[i]));
-                    if(data[i].poweredby) {
+                var loc = getUrl($(this).parent().attr('href'));
+                if(data[loc]){
+                    $(this).html(getResultNode(data[loc]).append('&nbsp;'));
+                    if(data[loc].poweredby) {
                         $(this).parent().css('background-color', '#DBFA7F');
                     }else{
                     }
@@ -37,25 +39,26 @@ $(document).ready(function() {
           // Green web search is disabled, return
           return;
         }
-        $('#res').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
+        
+        $('#footer').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
 
         (function checkLoop() {
             // Check if search results have 'cleanbits' link
-            if ( $('.Cleanbits').length != $('#res h3 > a.l').length) {
+            if ( $('.TGWF').length != $('#res h3 > a.l').length) {
 
                 // Remove all cleanbits links
-                $('.Cleanbits').remove();
+                $('.TGWF').remove();
 
                 // Check urls to see if search results are green/grey
-                var locs = new Array();
+                var locs = new Object();
                 var links = $('#res h3 > a.l');
                 $(links).each(function (i) {
-                    // Add cleanbits link to each google listing
-                    $(this).prepend(' <span class="Cleanbits">' + getImage('greenquestion') + '&nbsp;</span>');
-                    var loc = $(this).attr('href');
-                    locs[i] = getUrl(loc);
+                    // Add TGWF link to each google listing
+                    $(this).prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
+                    var loc = getUrl($(this).attr('href'));
+                    locs[loc] = loc;
                 });
-                if(locs.length > 6) {
+                if(Object.keys(locs).length > 0) {
                     chrome.extension.sendRequest({
                         locs: locs
                     }, function(response) {
