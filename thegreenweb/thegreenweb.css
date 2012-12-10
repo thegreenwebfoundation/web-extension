@@ -1,12 +1,6 @@
 .tgwf_green {
-    text-decoration: underline;
-    /*color: #a3c005 !important;*/
-    border-bottom:1px solid #a3c005;
+    border-bottom:1px dashed #a3c005 !important;
 }
-
-/*a.tgwf_green {
-    text-decoration: none !important;
-}*/
 
 .tgwf_question {
     text-decoration: underline;
