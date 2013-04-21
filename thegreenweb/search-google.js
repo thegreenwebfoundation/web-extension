@@ -18,10 +18,6 @@ chrome.extension.onRequest.addListener(
                 var loc = getUrl($(this).parent().attr('href'));
                 if(data[loc]){
                     $(this).html(getResultNode(data[loc]).append('&nbsp;'));
-                    if(data[loc].poweredby) {
-                        $(this).parent().css('background-color', '#DBFA7F');
-                    }else{
-                    }
                 }
             });
             sendResponse({});

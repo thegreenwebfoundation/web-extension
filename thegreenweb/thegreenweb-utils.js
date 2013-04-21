@@ -120,7 +120,7 @@ function getResult(data)
 {
     icon = getIcon(data);
     title = getTitle(data);
-    return getLinkImage(icon,title) + getPoweredResult(data) + '&nbsp;';
+    return getLinkImage(icon,title);
 }
 
 /**
@@ -129,21 +129,7 @@ function getResult(data)
 function getResultNode(data)
 {
     icon = getIcon(data);
-    return getLinkNode(icon).append(getPoweredResult(data));
-}
-
-/**
- * Get the resulting image from the data
- */
-function getPoweredResult(data)
-{
-    if(data.poweredby) {
-        icon = 'greenhouse';
-        title = data.poweredby.organisatie + ' uses green power';
-        return getLinkImage(icon,title) + '&nbsp;';
-    }else{
-        return '';
-    }
+    return getLinkNode(icon);
 }
 
 /**

@@ -6,7 +6,7 @@
  */
 
 /**
- * On request, send the data to the cleanbits api
+ * On request, send the data to the green web api
  */
 chrome.extension.onRequest.addListener(
   function(request, sender, sendResponse) 
@@ -40,7 +40,7 @@ chrome.tabs.onUpdated.addListener(
       if(cache != null){
         // Item in cache, check cachetime
         var resp = JSON.parse(cache);
-        if(resp.time > currenttime - 3600000){
+        if(resp.time && resp.time > currenttime - 3600000){
             showIcon(resp,tabId);
             return;
         }
