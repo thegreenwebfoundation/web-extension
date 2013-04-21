@@ -8,7 +8,7 @@
 /**
  * On Request, find all hrefs and assign green or grey icon
  */
-chrome.extension.onRequest.addListener(
+chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
@@ -35,7 +35,6 @@ chrome.extension.onRequest.addListener(
                 }
             });
         }
-        sendResponse({}); // snub them.
     });
 
 /**
@@ -57,8 +56,7 @@ $(document).ready(function() {
              });
         }
         if(Object.keys(locs).length > 0) {
-            chrome.extension.sendRequest({locs: locs}, function(response) {
-            });
+            chrome.extension.sendMessage({locs: locs}, function(response) {});
         }
     });
 });

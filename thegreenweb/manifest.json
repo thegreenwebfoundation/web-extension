@@ -7,7 +7,7 @@
   "background": {
     "scripts": ["background.js","thegreenweb-utils.js","tracker.js"]
   },
-  "minimum_chrome_version" : "20",
+  "minimum_chrome_version" : "22",
   "options_page": "options.html",
   "offline_enabled": false,
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",

@@ -8,26 +8,25 @@
 /**
  * On Request, find all hrefs and assign green or grey icon
  */
-chrome.extension.onRequest.addListener(
+chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
             $("#web ol > li").each(function (i) {
-              var loc = $(this).find('a').first().attr('href');
-              var strippedurl = getUrl(loc);
-                if (loc && strippedurl && data[strippedurl]) {
+              var loc = getUrl($(this).find('a').first().attr('href'));
+                if (loc && data[loc]) {
                   $(this).find('.TGWF').first()
-                    .html(getResultNode(data[strippedurl]).append('&nbsp;'))
+                    .html(getResultNode(data[loc]).append('&nbsp;'))
                     .qtip({
                       content: { 
                         text: function(api) { 
-                          return getTitleWithLink(data[strippedurl]); 
+                          return getTitleWithLink(data[loc]); 
                           }
                         },
                       show: { delay: 700 },
                       hide: { fixed:true,  delay:500 }
                     });
-                  if(data[strippedurl].green){
+                  if(data[loc].green){
                     $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green'});
                   } else {
                     $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light'});
@@ -35,7 +34,6 @@ chrome.extension.onRequest.addListener(
                 }
             });
         }
-        sendResponse({}); // snub them.
     });
 
 /**
@@ -49,17 +47,16 @@ $(document).ready(function() {
         }
         $('#ft').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
         
-        var locs = new Array();
+        var locs = new Object();
         if ( $("#web ol > li").length > 0 ) {
              $("#web ol > li").each(function (i) {
                  $(this).find('.url').parent().first().children().first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
-                 var loc = $(this).find('a').first().attr('href');
-                 locs[loc] = getUrl(loc);
+                 var loc = getUrl($(this).find('a').first().attr('href'));
+                 locs[loc] = loc;
              });
         }
-        if(locs.length > 0) {
-            chrome.extension.sendRequest({locs: locs}, function(response) {
-            });
+        if(Object.keys(locs).length > 0) {
+            chrome.runtime.sendMessage({locs: locs}, function(response) {});
         }
     });
 });

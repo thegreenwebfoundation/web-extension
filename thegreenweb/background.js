@@ -8,14 +8,12 @@
 /**
  * On request, send the data to the green web api
  */
-chrome.extension.onRequest.addListener(
+chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) 
   {
     if (request.locs){
         doSearchRequest(request.locs,sender.tab);
-        sendResponse({});
-    }else
-      sendResponse({}); // snub them.
+    }
   }
 );
 
@@ -59,8 +57,7 @@ function doSearchRequest(data,tab)
   xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
           var resp = JSON.parse(xhr.responseText);
-          chrome.tabs.sendRequest(tab.id, {data: resp}, function(response) {
-          });
+          chrome.tabs.sendMessage(tab.id, {data: resp}, function(response) {});
       }
   }
   xhr.send();
