@@ -2,7 +2,7 @@
  * Pagemod for all external links on site
  *
  * @author Arend-Jan Tetteroo <aj@cleanbits.net>
- * @copyright Cleanbits/The Green Web Foundation 2010-2012
+ * @copyright Cleanbits/The Green Web Foundation 2010-2013
  */
 
 /**

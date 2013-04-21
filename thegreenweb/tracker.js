@@ -1,3 +1,8 @@
+/**
+ * Google analytics tracker code
+ * 
+ * @type {[type]}
+ */
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-3743032-3']);
 _gaq.push(['_trackPageview']);

@@ -2,7 +2,7 @@
  * Chrome functions for The Green Web addon
  *
  * @author Arend-Jan Tetteroo <aj@cleanbits.net>
- * @copyright Cleanbits/The Green Web Foundation 2010-2012
+ * @copyright Cleanbits/The Green Web Foundation 2010-2013
  */
 
 /**
