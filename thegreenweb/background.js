@@ -20,32 +20,59 @@ chrome.runtime.onMessage.addListener(
 /**
  * Attach the normal pageAction to the tabs
  */
-chrome.tabs.onUpdated.addListener( 
-  function(tabId, changeInfo, tab) 
-  {
-      url = tab.url;
-      var prot = url.substring(0,6);
-      if(prot == 'chrome'){
-        // Don't show anything for chrome pages
-        return;
-      }
-      url = getUrl(url);
+chrome.webNavigation.onCommitted.addListener(function(details){doGreencheckForTabReplace(details);});
+chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details){doGreencheckForTabReplace(details);});
+chrome.webNavigation.onTabReplaced.addListener(function(details){doGreencheckForTabReplace(details);});
 
-      date = new Date();
-      currenttime = date.getTime();
-    
-      cache = window.localStorage.getItem(url);
-      if(cache != null){
-        // Item in cache, check cachetime
-        var resp = JSON.parse(cache);
-        if(resp.time && resp.time > currenttime - 3600000){
-            showIcon(resp,tabId);
-            return;
-        }
-      }
-      doRequest(url,tabId);
+function doGreencheckForTabReplace(details)
+{
+  var tabId = details.tabId;
+  chrome.tabs.get(tabId, function(tab){
+      url = tab.url;
+      tabId = tab.id;
+
+      if(isUrl(url)){
+        getGreencheck(getUrl(url), tabId);  
+      }      
+    }
+  );
+}
+
+function isUrl(url)
+{
+  var prot = url.substring(0,6);
+  if(prot == 'chrome'){
+     // Don't show anything for chrome pages
+     return false;
   }
-);
+  return true;
+}
+
+function doGreencheckForTab(details)
+{
+  tabId = details.tabId;
+  url   = details.url;
+  if(isUrl(url)){
+    getGreencheck(getUrl(url), tabId);  
+  }   
+}
+
+function getGreencheck(url, tabId)
+{
+  date = new Date();
+  currenttime = date.getTime();
+
+  cache = window.localStorage.getItem(url);
+  if(cache != null){
+    // Item in cache, check cachetime
+    var resp = JSON.parse(cache);
+    if(resp.time && resp.time > currenttime - 3600000){
+        showIcon(resp,tabId);
+        return;
+    }
+  }
+  doRequest(url,tabId);
+}
 
 /**
  * Do the search request
