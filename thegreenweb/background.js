@@ -21,18 +21,19 @@ chrome.runtime.onMessage.addListener(
  * Attach the normal pageAction to the tabs
  */
 chrome.webNavigation.onCommitted.addListener(function(details){doGreencheckForTabReplace(details);});
-chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details){doGreencheckForTabReplace(details);});
-chrome.webNavigation.onTabReplaced.addListener(function(details){doGreencheckForTabReplace(details);});
+chrome.tabs.onActivated.addListener(function(details){doGreencheckForTabReplace(details);});
 
 function doGreencheckForTabReplace(details)
 {
   var tabId = details.tabId;
   chrome.tabs.get(tabId, function(tab){
-      url = tab.url;
-      tabId = tab.id;
+      if(tab.url){
+        url = tab.url;
+        tabId = tab.id;
 
-      if(isUrl(url)){
-        getGreencheck(getUrl(url), tabId);  
+        if(isUrl(url)){
+          getGreencheck(getUrl(url), tabId);  
+        }        
       }      
     }
   );
