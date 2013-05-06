@@ -41,7 +41,7 @@ function doGreencheckForTabReplace(details)
 function isUrl(url)
 {
   var prot = url.substring(0,6);
-  if(prot == 'chrome'){
+  if(prot == 'chrome' || prot == 'file:/'){
      // Don't show anything for chrome pages
      return false;
   }
