@@ -25,8 +25,8 @@ chrome.tabs.onUpdated.addListener(
   {
       url = tab.url;
       var prot = url.substring(0,6);
-      if(prot == 'chrome'){
-        // Don't show anything for chrome pages
+      if(prot == 'chrome' || prot == 'file:/'){
+        // Don't show anything for chrome or local pages
         return;
       }
       url = getUrl(url);
