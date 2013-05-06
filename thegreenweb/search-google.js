@@ -37,14 +37,14 @@ $(document).ready(function() {
 
         (function checkLoop() {
             // Check if search results have 'cleanbits' link
-            if ( $('.TGWF').length != $('#res h3 > a.l').length) {
+            if ( $('.TGWF').length != $('#res h3.r > a').length) {
 
                 // Remove all cleanbits links
                 $('.TGWF').remove();
 
                 // Check urls to see if search results are green/grey
                 var locs = new Object();
-                var links = $('#res h3 > a.l');
+                var links = $('#res h3.r > a');
                 $(links).each(function (i) {
                     // Add TGWF link to each google listing
                     $(this).prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
