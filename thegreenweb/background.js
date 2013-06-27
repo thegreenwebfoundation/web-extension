@@ -27,7 +27,7 @@ function doGreencheckForTabReplace(details)
 {
   var tabId = details.tabId;
   chrome.tabs.get(tabId, function(tab){
-      if(tab.url){
+      if(tab && tab.url){
         url = tab.url;
         tabId = tab.id;
 
@@ -80,15 +80,44 @@ function getGreencheck(url, tabId)
  */
 function doSearchRequest(data,tab)
 {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://api.thegreenwebfoundation.org/greencheckmulti/"+JSON.stringify(data), true);
-  xhr.onreadystatechange = function() {
+  var length = Object.keys(data).length;
+  if (length <= 100){
+    var sites = Object.getOwnPropertyNames(data).splice(0,50);
+    var sitesUrl = JSON.stringify(sites);
+
+    doApiRequest(sitesUrl, tab);
+
+    var sites = Object.getOwnPropertyNames(data).splice(50,50);
+    var sitesUrl = JSON.stringify(sites);
+
+    doApiRequest(sitesUrl, tab);
+    return;
+  }
+  // Don't lookup, too much links will slow the browser down.
+  
+  /*
+  // Much links, do it in batches
+  var times = length/50;
+  for(var i = 0; i < times; i++){
+    var sites = Object.getOwnPropertyNames(data).splice(i*50,50);
+    var sitesUrl = JSON.stringify(sites);
+
+    doApiRequest(sitesUrl, tab);    
+  }
+  */
+}
+
+function doApiRequest(sitesUrl, tab)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
+    xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
           var resp = JSON.parse(xhr.responseText);
           chrome.tabs.sendMessage(tab.id, {data: resp}, function(response) {});
       }
-  }
-  xhr.send();
+    }
+    xhr.send();
 }
 
 /**
