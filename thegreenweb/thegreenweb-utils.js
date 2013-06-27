@@ -14,6 +14,7 @@ function getUrl(loc)
     if(loc == false){
         return false;
     }
+    loc = this.stripQueryStringFromUrl(loc);
     loc = this.stripPageFromUrl(loc);
     loc = this.stripPortFromUrl(loc);
     return loc;
@@ -36,6 +37,20 @@ function stripProtocolFromUrl(loc)
     }else{
         return false;
     }
+    return loc;
+}
+
+/**
+ * Only use the domain.tld, not the querystring behind ? or #
+ */
+function stripQueryStringFromUrl(loc)
+{
+    var temp = new Array();
+    temp = loc.split('?');
+    loc = temp[0];
+    var temp = new Array();
+    temp = loc.split('#');
+    loc = temp[0];
     return loc;
 }
 
