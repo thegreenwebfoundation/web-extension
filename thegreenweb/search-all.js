@@ -20,7 +20,6 @@ chrome.runtime.onMessage.addListener(
                 if (data[strippedurl]) {
                   
                   if(data[strippedurl].green){
-                   // $(this).addClass('tgwf_green');
                     $(this)
                     .addClass('tgwf_green')
                     .qtip({
