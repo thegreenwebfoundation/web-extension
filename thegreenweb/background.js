@@ -87,10 +87,12 @@ function doSearchRequest(data,tab)
 
     doApiRequest(sitesUrl, tab);
 
-    var sites = Object.getOwnPropertyNames(data).splice(50,50);
-    var sitesUrl = JSON.stringify(sites);
+    if (length > 50){
+      var sites = Object.getOwnPropertyNames(data).splice(50,50);
+      var sitesUrl = JSON.stringify(sites);
 
-    doApiRequest(sitesUrl, tab);
+      doApiRequest(sitesUrl, tab);
+    }
     return;
   }
   // Don't lookup, too much links will slow the browser down.
