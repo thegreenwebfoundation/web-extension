@@ -17,6 +17,13 @@ function getUrl(loc)
     loc = this.stripQueryStringFromUrl(loc);
     loc = this.stripPageFromUrl(loc);
     loc = this.stripPortFromUrl(loc);
+
+    // Don't lookup localhost
+    if(loc == 'localhost'){
+        return false;
+    }
+
+    console.log(loc);
     return loc;
 }
 

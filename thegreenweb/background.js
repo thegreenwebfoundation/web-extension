@@ -32,7 +32,10 @@ function doGreencheckForTabReplace(details)
         tabId = tab.id;
 
         if(isUrl(url)){
-          getGreencheck(getUrl(url), tabId);  
+            var checkUrl = getUrl(url);
+            if(checkUrl != false){
+                getGreencheck(checkUrl, tabId);
+            }
         }        
       }      
     }
