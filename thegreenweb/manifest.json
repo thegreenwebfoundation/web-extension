@@ -160,29 +160,29 @@
             "*://*.google.kz/*",
             "*://*.google.co.uz/*"
                 ],
-      "js": ["jquery-2.0.0.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-google.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-google.js"]
     },
     {
       "matches": ["*://search.yahoo.com/*"],
-      "js": ["jquery-2.0.0.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-yahoo.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-yahoo.js"]
     },
     {
       "matches": ["*://www.bing.com/*"],
-      "js": ["jquery-2.0.0.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-bing.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-bing.js"]
     },
     {
       "matches": ["*://ecosia.org/*"],
-      "js": ["jquery-2.0.0.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-ecosia.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-ecosia.js"]
     },
     {
       "matches": ["http://*/*"],
       "css": ["thegreenweb.css","qtip/jquery.qtip.css"],
-      "js": ["jquery-2.0.0.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-all.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-all.js"]
     },
     {
       "matches": ["https://*/*"],
       "css": ["thegreenweb.css","qtip/jquery.qtip.css"],
-      "js": ["jquery-2.0.0.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-all.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-all.js"]
     }
   ]
 }
