@@ -23,7 +23,6 @@ function getUrl(loc)
         return false;
     }
 
-    console.log(loc);
     return loc;
 }
 
