@@ -1,8 +1,8 @@
 /*
  * Bing search pagemod functions
  *
- * @author Arend-Jan Tetteroo <aj@cleanbits.net>
- * @copyright Cleanbits/The Green Web Foundation 2010-2013
+ * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
+ * @copyright Cleanbits/The Green Web Foundation 2010-2014
  */
 
 /**
@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
-            $("#results ul > li").each(function (i) {
+            $("#b_results > li").each(function (i) {
                 var loc = getUrl($(this).find('a').first().attr('href'));
 
                 if(data[loc]){
@@ -46,10 +46,10 @@ $(document).ready(function() {
           // Green web search is disabled, return
           return;
         }
-        $('#results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
+        $('#b_results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
         var locs = new Object();
-        if ( $("#results ul > li").length > 0 ) {
-             $("#results ul > li").each(function (i) {
+        if ( $("#b_results .b_algo").length > 0 ) {
+             $("#b_results .b_algo").each(function (i) {
                  $(this).find('a').first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                  var loc = getUrl($(this).find('a').first().attr('href'));
                  locs[loc] = loc;
