@@ -12,11 +12,17 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
-           
+
+            // Grab the current page url so we don't underlign same pages
+            currenturl = getUrl(document.URL);
+
             $("a").not('.TGWF-addon').each(function (i) {
               var loc = $(this).attr('href');
               var strippedurl = getUrl(loc);
               if (loc && strippedurl) {
+                if (strippedurl == currenturl) {
+                    return true;
+                }
                 if (data[strippedurl]) {
                   
                   if(data[strippedurl].green){
@@ -57,16 +63,12 @@ $(document).ready(function() {
 
 function getUrlsAndSendRequest()
 {
-  currenturl = getUrl(document.URL);
   var locs = new Object();
   $("a").not('.TGWF-addon').each(function (i) {
        var loc = $(this).attr('href');
        var strippedurl = getUrl(loc);
        if (loc && strippedurl) {
-         /*if (getUrl(loc) == currenturl) {
-           return true;
-         }*/
-         locs[strippedurl] = strippedurl 
+         locs[strippedurl] = strippedurl
        }             
   });
   if(Object.keys(locs).length > 0) {
