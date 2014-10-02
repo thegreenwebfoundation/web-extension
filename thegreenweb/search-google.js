@@ -36,16 +36,16 @@ $(document).ready(function() {
         $('#footer').append("<p id='thegreenweb' style='text-align:center;'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
 
         (function checkLoop() {
-            // Check if search results have 'cleanbits' link
-            if ( $('.TGWF').length != $('#res h3.r > a').length) {
+            // Check if search results have 'greenweb' link
+            var results = $('#res').find('h3.r > a');
+            if ( $('.TGWF').length != results.length) {
 
                 // Remove all cleanbits links
                 $('.TGWF').remove();
 
                 // Check urls to see if search results are green/grey
-                var locs = new Object();
-                var links = $('#res h3.r > a');
-                $(links).each(function (i) {
+                var locs = {};
+                $(results).each(function (i) {
                     // Add TGWF link to each google listing
                     $(this).prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                     var loc = getUrl($(this).attr('href'));
