@@ -42,6 +42,12 @@ function doGreencheckForTabReplace(details)
   );
 }
 
+/**
+ * Check if the url is available for lookup, chrome and file need to be ignored
+ * 
+ * @param url
+ * @returns {boolean}
+ */
 function isUrl(url)
 {
   var prot = url.substring(0,6);
@@ -52,15 +58,12 @@ function isUrl(url)
   return true;
 }
 
-function doGreencheckForTab(details)
-{
-  tabId = details.tabId;
-  url   = details.url;
-  if(isUrl(url)){
-    getGreencheck(getUrl(url), tabId);  
-  }   
-}
-
+/**
+ * Do a greencheck api call if not cached
+ *
+ * @param url
+ * @param tabId
+ */
 function getGreencheck(url, tabId)
 {
   date = new Date();
@@ -98,20 +101,14 @@ function doSearchRequest(data,tab)
     }
     return;
   }
-  // Don't lookup, too much links will slow the browser down.
-  
-  /*
-  // Much links, do it in batches
-  var times = length/50;
-  for(var i = 0; i < times; i++){
-    var sites = Object.getOwnPropertyNames(data).splice(i*50,50);
-    var sitesUrl = JSON.stringify(sites);
-
-    doApiRequest(sitesUrl, tab);    
-  }
-  */
 }
 
+/**
+ * Do an api request for multiple sites
+ *
+ * @param sitesUrl
+ * @param tab
+ */
 function doApiRequest(sitesUrl, tab)
 {
     var xhr = new XMLHttpRequest();
@@ -126,7 +123,7 @@ function doApiRequest(sitesUrl, tab)
 }
 
 /**
-* Do the request
+* Do the request for a single url
 */
 function doRequest(url,tabId)
 {
@@ -148,7 +145,7 @@ function doRequest(url,tabId)
 */
 function showIcon(resp,tabId)
 {
-    icon = getImagePath(getIcon(resp));
+    icon  = getImagePath(getIcon(resp));
     title = getTitle(resp);
     chrome.pageAction.setIcon({'tabId' : tabId, 'path' : icon});
     chrome.pageAction.setTitle({'tabId' : tabId, 'title' : title});
