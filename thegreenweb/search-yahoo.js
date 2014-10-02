@@ -12,7 +12,8 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
-            $("#web ol > li").each(function (i) {
+            var list = $("#web").find("ol > li");
+            list.each(function (i) {
               var loc = getUrl($(this).find('a').first().attr('href'));
                 if (loc && data[loc]) {
                   $(this).find('.TGWF').first()
@@ -47,9 +48,10 @@ $(document).ready(function() {
         }
         $('#ft').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
         
-        var locs = new Object();
-        if ( $("#web ol > li").length > 0 ) {
-             $("#web ol > li").each(function (i) {
+        var locs = {};
+        var list = $("#web").find("ol > li");
+        if (list.length > 0) {
+             list.each(function (i) {
                  $(this).find('.url').parent().first().children().first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                  var loc = getUrl($(this).find('a').first().attr('href'));
                  locs[loc] = loc;
