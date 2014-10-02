@@ -7,7 +7,8 @@ Usage
 =====
 
 Want to use this extension, install it from the chrome webstore : 
-https://chrome.google.com/webstore/detail/the-green-web/ekiibapogjgmlhlhpoalbppfhhgkcogc
+
+  https://chrome.google.com/webstore/detail/the-green-web/ekiibapogjgmlhlhpoalbppfhhgkcogc
 
 Want to help?
 =============
