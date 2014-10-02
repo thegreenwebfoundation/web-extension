@@ -47,7 +47,9 @@ $(document).ready(function() {
           return;
         }
         $('.options').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
-        var locs = new Object();
+        var locs = {};
+
+        // TODO This no longer works, we need an iframe approach, see : https://github.com/thegreenwebfoundation/chrome-extension/issues/1
         if ( $(".result > li").length > 0 ) {
              $(".result > li").each(function (i) {
                  $(this).find('a').first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));

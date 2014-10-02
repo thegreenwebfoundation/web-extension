@@ -172,7 +172,7 @@
       "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-bing.js"]
     },
     {
-      "matches": ["*://ecosia.org/*"],
+      "matches": ["*://www.ecosia.org/*"],
       "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-ecosia.js"]
     },
     {
