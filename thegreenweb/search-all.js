@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 function getUrlsAndSendRequest()
 {
-  var locs = new Object();
+  var locs = {};
   $("a").not('.TGWF-addon').each(function (i) {
        var loc = $(this).attr('href');
        var strippedurl = getUrl(loc);

@@ -44,7 +44,7 @@ function doGreencheckForTabReplace(details)
 
 /**
  * Check if the url is available for lookup, chrome and file need to be ignored
- * 
+ *
  * @param url
  * @returns {boolean}
  */
