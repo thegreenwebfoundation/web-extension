@@ -35,15 +35,16 @@ function stripProtocolFromUrl(loc)
     if(loc == undefined){
         return false;
     }
+
     var prot = loc.substring(0,5);
     if(prot == 'http:'){
-        loc = loc.substring(7);
-    }else if(prot == 'https'){
-        loc = loc.substring(8);
-    }else{
-        return false;
+        return loc.substring(7);
     }
-    return loc;
+    if(prot == 'https'){
+        return loc.substring(8);
+    }
+    // No http or https, no lookup
+    return false;
 }
 
 /**
@@ -51,10 +52,8 @@ function stripProtocolFromUrl(loc)
  */
 function stripQueryStringFromUrl(loc)
 {
-    var temp = new Array();
-    temp = loc.split('?');
+    var temp = loc.split('?');
     loc = temp[0];
-    var temp = new Array();
     temp = loc.split('#');
     loc = temp[0];
     return loc;
@@ -65,8 +64,7 @@ function stripQueryStringFromUrl(loc)
  */
 function stripPageFromUrl(loc)
 {
-    var temp = new Array();
-    temp = loc.split('/');
+    var temp = loc.split('/');
     loc = temp[0];
     return loc;
 }
@@ -76,8 +74,7 @@ function stripPageFromUrl(loc)
  */
 function stripPortFromUrl(loc)
 {
-    var temp = new Array();
-    temp = loc.split(':');
+    var temp = loc.split(':');
     loc = temp[0];
     return loc;
 }
@@ -105,10 +102,15 @@ function getLinkNode(color)
  */
 function getImage(color)
 {
-    var img = getImagePath(color);
-    return  "<img style='width:16px; height:16px;border:none;' src='"+img+"'/>";
+    return  "<img style='width:16px; height:16px;border:none;' src='"+  getImagePath(color) +"'/>";
 }
 
+/**
+ * Get the image element as a jquery Node
+ *
+ * @param color
+ * @returns {*|jQuery|HTMLElement}
+ */
 function getImageNode(color)
 {
     return $('<img>', { style: 'width:16px; height:16px;border:none;', src: getImagePath(color)});
@@ -119,12 +121,12 @@ function getImageNode(color)
  */
 function getImagePath(file)
 {
-    var icons = new Array();
+    var icons = [];
     icons['green']         = chrome.extension.getURL("/images/green20x20.gif");
     icons['grey']          = chrome.extension.getURL("/images/grey20x20.gif");
     icons['greenquestion'] = chrome.extension.getURL("/images/greenquestion20x20.gif");
     icons['greenfan']      = chrome.extension.getURL("/images/greenfan20x20.gif");
-    icons['greenhouse']      = chrome.extension.getURL("/images/greenhouse20x20.gif");
+    icons['greenhouse']    = chrome.extension.getURL("/images/greenhouse20x20.gif");
 
      if(icons[file]){
         return icons[file];
@@ -132,16 +134,6 @@ function getImagePath(file)
 
     iconPath = 'http://images.cleanbits.net/icons/' + file + "20x20.gif";
     return iconPath;
-}
-
-/**
- * Get the resulting image from the data
- */
-function getResult(data)
-{
-    icon = getIcon(data);
-    title = getTitle(data);
-    return getLinkImage(icon,title);
 }
 
 /**
@@ -158,16 +150,20 @@ function getResultNode(data)
  */
 function getIcon(data)
 {
-    var icon = 'grey';
-    if(data.green) {
-        icon = 'green';
+    if (data.green) {
+        // Green
         if(data.icon) {
-            icon = data.icon;
+            // Special icon
+            return data.icon;
         }
-    }else if(data.data == false){
-        icon = 'greenquestion';
+        return 'green';
     }
-    return icon;
+
+    if(data.data == false){
+        // Not enough data for the domain, show question
+        return 'greenquestion';
+    }
+    return 'grey';
 }
 
 /**
@@ -176,21 +172,22 @@ function getIcon(data)
 function getTitle(data)
 {
     if(data.green) {
+        // Green
         if(data.hostedby){
-            title = 'Sustainably hosted by ' + data.hostedby;
-        }else{
-            title = 'is made sustainable through Cleanbits';
+            // We know the hoster, show it
+            return 'Sustainably hosted by ' + data.hostedby;
         }
-    }else{
-        if(data.data == false){
-            // No data available, show help message
-            title = "No data available yet for this country domain. Wanna help? Contact us through www.cleanbits.net";
-        }else{
-            // Data available, so show grey site
-            title = data.url + ' is hosted grey';
-        }
+        return 'is sustainably hosted';
     }
-    return title;
+
+    if(data.data == false){
+        // No data available, show help message
+        return "No data available yet for this country domain. Wanna help? Contact us through www.thegreenwebfoundation.org";
+    }
+
+    // Data available, so show grey site
+    return data.url + ' is hosted grey';
+
 }
 
 /**
@@ -198,24 +195,19 @@ function getTitle(data)
  */
 function getTitleWithLink(data)
 {
-    if(data){
-        if (data.green) {
-            if (data.hostedby) {
-                title = data.url + ' ' + '<a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org/thegreenweb/#/providers/' + data.hostedbyid + '\'>' + ' is sustainably hosted by ' + ' ' + data.hostedby + '</a>';
-            } else {
-                title = data.url + ' ' + 'is made sustainable through Cleanbits';
-            }
-        } else {
-            if (data.data == false) {
-                // No data available, show help message
-                title = "No data available yet for this country domain. Wanna help? Contact us through "  + " <a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
-            } else {
-                // Data available, so show grey site
-                title = data.url + ' ' + ' is hosted grey';
-            }
+    if(!data){
+        return '';
+    }
+    if (data.green) {
+        if (data.hostedby) {
+            return data.url + ' ' + '<a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org/thegreenweb/#/providers/' + data.hostedbyid + '\'>' + ' is sustainably hosted by ' + ' ' + data.hostedby + '</a>';
         }
-    }else{
-        title = '';
-    }    
-    return title;
+        return data.url + ' ' + 'is sustainably hosted';
+    }
+    if (data.data == false) {
+        // No data available, show help message
+        return "No data available yet for this country domain. Wanna help? Contact us through "  + " <a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
+    }
+    // Data available, so show grey site
+    return data.url + ' ' + ' is hosted grey';
 }
