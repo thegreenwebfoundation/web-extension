@@ -12,12 +12,12 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             data = request.data;
-            $(".result > li").each(function (i) {
+            $(".result").each(function (i) {
                 var loc = getUrl($(this).find('a').first().attr('href'));
 
                 if(data[loc]){
                     $(this).find('.TGWF').first()
-                      .html(getResultNode(data[loc]).append('&nbsp;'))
+                      .html(getResultNode(data[loc]))
                       .qtip({
                           content: { 
                             text: function(api) { 
@@ -46,12 +46,12 @@ $(document).ready(function() {
           // Green web search is disabled, return
           return;
         }
-        $('.options').append("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
+        $('.search-filters-text').append("<span id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</span>');
         var locs = {};
 
         // TODO This no longer works, we need an iframe approach, see : https://github.com/thegreenwebfoundation/chrome-extension/issues/1
-        if ( $(".result > li").length > 0 ) {
-             $(".result > li").each(function (i) {
+        if ( $(".result").length > 0 ) {
+             $(".result").each(function (i) {
                  $(this).find('a').first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                  var loc = getUrl($(this).find('a').first().attr('href'));
                  locs[loc] = loc;
