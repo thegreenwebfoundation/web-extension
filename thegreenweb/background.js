@@ -9,7 +9,7 @@
  * On request, send the data to the green web api
  */
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) 
+  function(request, sender, sendResponse)
   {
     if (request.locs){
         doSearchRequest(request.locs,sender.tab);
@@ -36,8 +36,8 @@ function doGreencheckForTabReplace(details)
             if(checkUrl != false){
                 getGreencheck(checkUrl, tabId);
             }
-        }        
-      }      
+        }
+      }
     }
   );
 }
