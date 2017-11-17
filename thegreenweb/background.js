@@ -20,31 +20,31 @@ chrome.runtime.onMessage.addListener(
 /**
  * Attach the normal pageAction to the tabs
  */
+function doGreencheckForTabReplace(details)
+{
+    var tabId = details.tabId;
+    chrome.tabs.get(tabId, function(tab){
+            if (tab && tab.url) {
+                var url = tab.url;
+                tabId = tab.id;
+
+                if (isUrl(url)) {
+                    var checkUrl = getUrl(url);
+                    if (checkUrl !== false) {
+                        getGreencheck(checkUrl, tabId);
+                    }
+                }
+            }
+        }
+    );
+}
+
 chrome.webNavigation.onCommitted.addListener(function(details){
     doGreencheckForTabReplace(details);
 });
 chrome.tabs.onActivated.addListener(function(details){
     doGreencheckForTabReplace(details);
 });
-
-function doGreencheckForTabReplace(details)
-{
-  var tabId = details.tabId;
-  chrome.tabs.get(tabId, function(tab){
-      if (tab && tab.url) {
-        var url = tab.url;
-        tabId = tab.id;
-
-        if (isUrl(url)) {
-            var checkUrl = getUrl(url);
-            if (checkUrl !== false) {
-                getGreencheck(checkUrl, tabId);
-            }
-        }
-      }
-    }
-  );
-}
 
 /**
  * Check if the url is available for lookup, chrome and file need to be ignored
