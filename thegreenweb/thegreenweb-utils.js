@@ -82,16 +82,6 @@ function stripPortFromUrl(loc)
 }
 
 /**
- * Get the image with a cleanbits link around it
- */
-function getLinkImage(color, tooltip)
-{
-    var output = "<a href='http://www.thegreenwebfoundation.org/add-ons/' target='_blank' title='" + tooltip + "' class='TGWF-addon'>";
-    output += getImage(color) + "</a>";
-    return output;
-}
-
-/**
  * Get the image with a cleanbits link around it as a jquery node
  */
 function getGreenwebLinkNode(color, tooltip)
@@ -109,6 +99,11 @@ function getGreenwebLinkNode(color, tooltip)
     return aItem;
 }
 
+/**
+ * Get the footer element for displaying the green web extension is working
+ *
+ * @returns {HTMLParagraphElement}
+ */
 function getFooterElement()
 {
     var greenWebEnabledItem = document.createElement("p");
@@ -126,19 +121,17 @@ function getFooterElement()
     return greenWebEnabledItem;
 }
 
+/**
+ * get a link node based on color
+ *
+ * @param color
+ * @returns {void | * | jQuery}
+ */
 function getLinkNode(color)
 {
     var href = 'http://www.thegreenwebfoundation.org';
     return $("<a>", { href: href, class: 'TGWF-addon' })
                  .append($('<img>', { src: getImagePath(color), style: 'width:16px; height:16px;border:none;'  } ));
-}
-
-/**
- * Get the image element based on the color
- */
-function getImage(color)
-{
-    return  "<img style='width:16px; height:16px;border:none;' src='"+  getImagePath(color) +"'/>";
 }
 
 /**
@@ -176,8 +169,7 @@ function getImagePath(file)
  */
 function getResultNode(data)
 {
-    var icon = getIcon(data);
-    return getLinkNode(icon);
+    return getLinkNode(getIcon(data));
 }
 
 /**
