@@ -1,9 +1,11 @@
 The Green Web web-extension
-==============================
+===========================
 
 The Green Web Addon 
 
-Should also work on other browsers with web-extensions support like Firefox (48+), Opera and Edge (not tested)
+Tested on Chrome and Firefox
+
+Should also work on other browsers with web-extensions support like Opera and Edge (not tested yet)
 
 Usage
 =====
