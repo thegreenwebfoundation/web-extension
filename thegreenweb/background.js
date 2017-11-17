@@ -79,7 +79,7 @@ function getGreencheck(url, tabId)
   var currentTime = getCurrentTime();
 
   var cache = window.localStorage.getItem(url);
-  if (cache != null) {
+  if (cache !== null) {
     // Item in cache, check cachetime
     var resp = JSON.parse(cache);
     if (resp.time && resp.time > currentTime - 3600000) {
