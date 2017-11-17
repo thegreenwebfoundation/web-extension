@@ -120,7 +120,7 @@ function doSearchRequest(data,tab)
 function doApiRequest(sitesUrl, tab)
 {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
+    xhr.open("GET", "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
@@ -136,7 +136,7 @@ function doApiRequest(sitesUrl, tab)
 function doRequest(url,tabId)
 {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://api.thegreenwebfoundation.org/greencheck/"+url, true);
+  xhr.open("GET", "https://api.thegreenwebfoundation.org/greencheck/"+url, true);
   xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
