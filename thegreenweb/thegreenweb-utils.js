@@ -11,7 +11,7 @@
 function getUrl(loc)
 {
     loc = this.stripProtocolFromUrl(loc);
-    if(loc == false){
+    if (loc === false) {
         return false;
     }
     loc = this.stripQueryStringFromUrl(loc);
@@ -19,7 +19,7 @@ function getUrl(loc)
     loc = this.stripPortFromUrl(loc);
 
     // Don't lookup localhost
-    if(loc == 'localhost'){
+    if (loc === 'localhost') {
         return false;
     }
 
@@ -32,17 +32,19 @@ function getUrl(loc)
  */
 function stripProtocolFromUrl(loc)
 {
-    if(loc == undefined){
+    if (loc === undefined) {
         return false;
     }
 
     var prot = loc.substring(0,5);
-    if(prot == 'http:'){
+    if(prot === 'http:'){
         return loc.substring(7);
     }
-    if(prot == 'https'){
+
+    if(prot === 'https'){
         return loc.substring(8);
     }
+
     // No http or https, no lookup
     return false;
 }
@@ -92,9 +94,8 @@ function getLinkImage(color,tooltip)
 function getLinkNode(color)
 {
     var href = 'http://www.thegreenwebfoundation.org';
-    var a    = $("<a>", { href: href, class: 'TGWF-addon' })
+    return $("<a>", { href: href, class: 'TGWF-addon' })
                  .append($('<img>', { src: getImagePath(color), style: 'width:16px; height:16px;border:none;'  } ));
-    return a;
 }
 
 /**
@@ -121,19 +122,18 @@ function getImageNode(color)
  */
 function getImagePath(file)
 {
-    var icons = [];
+    var icons = {};
     icons['green']         = chrome.runtime.getURL("/images/green20x20.gif");
     icons['grey']          = chrome.runtime.getURL("/images/grey20x20.gif");
     icons['greenquestion'] = chrome.runtime.getURL("/images/greenquestion20x20.gif");
     icons['greenfan']      = chrome.runtime.getURL("/images/greenfan20x20.gif");
     icons['greenhouse']    = chrome.runtime.getURL("/images/greenhouse20x20.gif");
 
-     if(icons[file]){
+     if (icons[file]) {
         return icons[file];
     }
 
-    iconPath = 'http://images.cleanbits.net/icons/' + file + "20x20.gif";
-    return iconPath;
+    return 'http://images.cleanbits.net/icons/' + file + "20x20.gif";
 }
 
 /**
@@ -141,7 +141,7 @@ function getImagePath(file)
  */
 function getResultNode(data)
 {
-    icon = getIcon(data);
+    var icon = getIcon(data);
     return getLinkNode(icon);
 }
 
@@ -159,7 +159,7 @@ function getIcon(data)
         return 'green';
     }
 
-    if(data.data == false){
+    if (data.data === false) {
         // Not enough data for the domain, show question
         return 'greenquestion';
     }
@@ -180,7 +180,7 @@ function getTitle(data)
         return 'is sustainably hosted';
     }
 
-    if(data.data == false){
+    if (data.data === false) {
         // No data available, show help message
         return "No data available yet for this country domain. Wanna help? Contact us through www.thegreenwebfoundation.org";
     }
@@ -195,7 +195,7 @@ function getTitle(data)
  */
 function getTitleWithLink(data)
 {
-    if(!data){
+    if (!data) {
         return '';
     }
     if (data.green) {
@@ -204,10 +204,12 @@ function getTitleWithLink(data)
         }
         return data.url + ' ' + 'is sustainably hosted';
     }
-    if (data.data == false) {
+
+    if (data.data === false) {
         // No data available, show help message
         return "No data available yet for this country domain. Wanna help? Contact us through "  + " <a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
     }
+
     // Data available, so show grey site
     return data.url + ' ' + ' is hosted grey';
 }
