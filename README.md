@@ -1,7 +1,7 @@
-The Green Web chrome-extension
+The Green Web web-extension
 ==============================
 
-The Green Web Addon For Chrome
+The Green Web Addon 
 
 Should also work on other browsers with web-extensions support like Firefox (48+), Opera and Edge (not tested)
 

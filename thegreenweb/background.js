@@ -2,7 +2,7 @@
  * Chrome functions for The Green Web addon
  *
  * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
- * @copyright Cleanbits/The Green Web Foundation 2010-2014
+ * @copyright Cleanbits/The Green Web Foundation 2010-2017
  */
 
 /**
@@ -20,27 +20,31 @@ chrome.runtime.onMessage.addListener(
 /**
  * Attach the normal pageAction to the tabs
  */
-chrome.webNavigation.onCommitted.addListener(function(details){doGreencheckForTabReplace(details);});
-chrome.tabs.onActivated.addListener(function(details){doGreencheckForTabReplace(details);});
-
 function doGreencheckForTabReplace(details)
 {
-  var tabId = details.tabId;
-  chrome.tabs.get(tabId, function(tab){
-      if(tab && tab.url){
-        url = tab.url;
-        tabId = tab.id;
+    var tabId = details.tabId;
+    chrome.tabs.get(tabId, function(tab){
+            if (tab && tab.url) {
+                var url = tab.url;
+                tabId = tab.id;
 
-        if(isUrl(url)){
-            var checkUrl = getUrl(url);
-            if(checkUrl != false){
-                getGreencheck(checkUrl, tabId);
+                if (isUrl(url)) {
+                    var checkUrl = getUrl(url);
+                    if (checkUrl !== false) {
+                        getGreencheck(checkUrl, tabId);
+                    }
+                }
             }
         }
-      }
-    }
-  );
+    );
 }
+
+chrome.webNavigation.onCommitted.addListener(function(details){
+    doGreencheckForTabReplace(details);
+});
+chrome.tabs.onActivated.addListener(function(details){
+    doGreencheckForTabReplace(details);
+});
 
 /**
  * Check if the url is available for lookup, chrome and file need to be ignored
@@ -51,11 +55,17 @@ function doGreencheckForTabReplace(details)
 function isUrl(url)
 {
   var prot = url.substring(0,6);
-  if(prot == 'chrome' || prot == 'file:/'){
+  if (prot === 'chrome' || prot === 'file:/') {
      // Don't show anything for chrome pages
      return false;
   }
   return true;
+}
+
+function getCurrentTime()
+{
+    var date = new Date();
+    return date.getTime();
 }
 
 /**
@@ -66,14 +76,13 @@ function isUrl(url)
  */
 function getGreencheck(url, tabId)
 {
-  date = new Date();
-  currenttime = date.getTime();
+  var currentTime = getCurrentTime();
 
-  cache = window.localStorage.getItem(url);
-  if(cache != null){
+  var cache = window.localStorage.getItem(url);
+  if (cache !== null) {
     // Item in cache, check cachetime
     var resp = JSON.parse(cache);
-    if(resp.time && resp.time > currenttime - 3600000){
+    if (resp.time && resp.time > currentTime - 3600000) {
         showIcon(resp,tabId);
         return;
     }
@@ -94,12 +103,11 @@ function doSearchRequest(data,tab)
     doApiRequest(sitesUrl, tab);
 
     if (length > 50){
-      var sites = Object.getOwnPropertyNames(data).splice(50,50);
-      var sitesUrl = JSON.stringify(sites);
+      sites = Object.getOwnPropertyNames(data).splice(50,50);
+      sitesUrl = JSON.stringify(sites);
 
       doApiRequest(sitesUrl, tab);
     }
-    return;
   }
 }
 
@@ -112,9 +120,9 @@ function doSearchRequest(data,tab)
 function doApiRequest(sitesUrl, tab)
 {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
+    xhr.open("GET", "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
     xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
+      if (xhr.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
           chrome.tabs.sendMessage(tab.id, {data: resp}, function(response) {});
       }
@@ -128,11 +136,11 @@ function doApiRequest(sitesUrl, tab)
 function doRequest(url,tabId)
 {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://api.thegreenwebfoundation.org/greencheck/"+url, true);
+  xhr.open("GET", "https://api.thegreenwebfoundation.org/greencheck/"+url, true);
   xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
+      if (xhr.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
-          resp.time = currenttime;
+          resp.time = getCurrentTime();
           window.localStorage.setItem(url,JSON.stringify(resp));
           showIcon(resp,tabId);
       }
@@ -145,9 +153,9 @@ function doRequest(url,tabId)
 */
 function showIcon(resp,tabId)
 {
-    icon  = getImagePath(getIcon(resp));
-    title = getTitle(resp);
+    var icon  = getImagePath(getIcon(resp));
+    var title = getTitle(resp);
     chrome.pageAction.setIcon({'tabId' : tabId, 'path' : icon});
     chrome.pageAction.setTitle({'tabId' : tabId, 'title' : title});
     chrome.pageAction.show(tabId);
-}  
+}

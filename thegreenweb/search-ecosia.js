@@ -2,7 +2,7 @@
  * Ecosia search pagemod functions (Based on bing search)
  *
  * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
- * @copyright Cleanbits/The Green Web Foundation 2010-2014
+ * @copyright Cleanbits/The Green Web Foundation 2010-2017
  */
 
 /**
@@ -11,8 +11,9 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
-            data = request.data;
-            $(".result").each(function (i) {
+            var data = request.data;
+
+            $(".result").each(function () {
                 var loc = getUrl($(this).find('a').first().attr('href'));
 
                 if(data[loc]){
@@ -42,23 +43,30 @@ chrome.runtime.onMessage.addListener(
  */
 $(document).ready(function() {
     chrome.storage.local.get("tgwf_search_disabled", function(items) {
-        if(items.tgwf_search_disabled == 1){
+        if (items && items.tgwf_search_disabled && items.tgwf_search_disabled === 1) {
           // Green web search is disabled, return
           return;
         }
-        $('.search-filters-text').append("<span id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</span>');
-        var locs = {};
 
-        // TODO This no longer works, we need an iframe approach, see : https://github.com/thegreenwebfoundation/chrome-extension/issues/1
+        // Remove all tgwf links
+        $('#thegreenweb').remove();
+
+        var footer = document.getElementById("resultsContainer");
+        footer.appendChild(getFooterElement());
+
+        var locs = {};
         if ( $(".result").length > 0 ) {
+            // Remove all tgwf links
+            $('.TGWF').remove();
+
              $(".result").each(function (i) {
                  $(this).find('a').first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                  var loc = getUrl($(this).find('a').first().attr('href'));
                  locs[loc] = loc;
              });
         }
-        if(Object.keys(locs).length > 0) {
-            chrome.extension.sendMessage({locs: locs}, function(response) {});
+        if (Object.keys(locs).length > 0) {
+            chrome.runtime.sendMessage({locs: locs}, function(response) {});
         }
     });
 });
