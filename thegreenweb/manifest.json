@@ -6,13 +6,13 @@
   "version": "2.0.2",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
-    "scripts": ["background.js","thegreenweb-utils.js","tracker.js"],
+    "scripts": ["background.js","thegreenweb-utils.js"],
     "persistent": false
   },
   "minimum_chrome_version" : "22",
   "options_page": "options.html",
   "offline_enabled": false,
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_security_policy": "default-src 'self'",
   "icons": {
     "16" : "/icons/16.gif",
     "48" : "/icons/48.gif",
