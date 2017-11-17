@@ -3,15 +3,15 @@
  * 
  * @type {[type]}
  */
-/*
-Disable google analytics tracking for firefox
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-3743032-3']);
-_gaq.push(['_trackPageview']);
 
-(function() {
- var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
- ga.src = 'https://ssl.google-analytics.com/ga.js';
- var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-*/
+const GA_TRACKING_ID = "UA-3743032-3";
+const GA_CLIENT_ID = 1;
+
+var aType = 'extensionLoaded';
+var request = new XMLHttpRequest();
+var message =
+    "v=1&tid=" + GA_TRACKING_ID + "&cid= " + GA_CLIENT_ID + "&aip=1" +
+    "&ds=add-on&t=event&ec=browser&ea=" + aType;
+
+request.open("POST", "https://www.google-analytics.com/collect", true);
+request.send(message);

@@ -158,4 +158,4 @@ function showIcon(resp,tabId)
     chrome.pageAction.setIcon({'tabId' : tabId, 'path' : icon});
     chrome.pageAction.setTitle({'tabId' : tabId, 'title' : title});
     chrome.pageAction.show(tabId);
-}  
+}
