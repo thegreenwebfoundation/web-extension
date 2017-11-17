@@ -43,13 +43,20 @@ chrome.runtime.onMessage.addListener(
  */
 $(document).ready(function() {
     chrome.storage.local.get("tgwf_search_disabled", function(items) {
-        if(items.tgwf_search_disabled == 1){
+        if (items && items.tgwf_search_disabled && items.tgwf_search_disabled == 1) {
           // Green web search is disabled, return
           return;
         }
+        // Remove all tgwf links
+        $('#thegreenweb').remove();
+
         $('#b_results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
         var locs = {};
         if ( $("#b_results").find(".b_algo").length > 0 ) {
+
+            // Remove all tgwf links
+            $('.TGWF').remove();
+
              $("#b_results").find(".b_algo").each(function (i) {
                  $(this).find('a').first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                  var loc = getUrl($(this).find('a').first().attr('href'));
