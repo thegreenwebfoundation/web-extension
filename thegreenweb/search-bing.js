@@ -50,7 +50,9 @@ $(document).ready(function() {
         // Remove all tgwf links
         $('#thegreenweb').remove();
 
-        $('#b_results').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
+        var footer = document.getElementById("b_results");
+        footer.appendChild(getFooterElement());
+
         var locs = {};
         if ( $("#b_results").find(".b_algo").length > 0 ) {
 

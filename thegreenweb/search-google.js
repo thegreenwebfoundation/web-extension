@@ -32,8 +32,9 @@ $(document).ready(function() {
           // Green web search is disabled, return
           return;
         }
-        
-        $('#footer').append("<p id='thegreenweb' style='text-align:center;'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled<span id=\'thegreenwebenabled\'/></p>');
+
+        var footer = document.getElementById("fbar");
+        footer.appendChild(getFooterElement());
 
         (function checkLoop() {
             // Check if search results have 'greenweb' link

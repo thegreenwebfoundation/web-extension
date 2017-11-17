@@ -51,8 +51,9 @@ $(document).ready(function() {
         // Remove all tgwf links
         $('#thegreenweb').remove();
 
-        $('#ft').prepend("<p id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</p>');
-        
+        var footer = document.getElementById("ft");
+        footer.appendChild(getFooterElement());
+
         var locs = {};
         var list = $("#web").find("ol > li");
         if (list.length > 0) {

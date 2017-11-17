@@ -84,11 +84,46 @@ function stripPortFromUrl(loc)
 /**
  * Get the image with a cleanbits link around it
  */
-function getLinkImage(color,tooltip)
+function getLinkImage(color, tooltip)
 {
     var output = "<a href='http://www.thegreenwebfoundation.org/add-ons/' target='_blank' title='" + tooltip + "' class='TGWF-addon'>";
     output += getImage(color) + "</a>";
     return output;
+}
+
+/**
+ * Get the image with a cleanbits link around it as a jquery node
+ */
+function getGreenwebLinkNode(color, tooltip)
+{
+    var aItem = document.createElement("a");
+    aItem.href  = 'http://www.thegreenwebfoundation.org';
+    aItem.class = 'TGWF-addon';
+    aItem.title = tooltip;
+
+    var imageItem = document.createElement("img");
+    imageItem.src = getImagePath(color);
+    imageItem.style= 'width:16px; height:16px;border:none;';
+    aItem.appendChild(imageItem);
+
+    return aItem;
+}
+
+function getFooterElement()
+{
+    var greenWebEnabledItem = document.createElement("p");
+    greenWebEnabledItem.id = 'thegreenweb';
+    greenWebEnabledItem.style = 'text-align:center;';
+
+    var image = getGreenwebLinkNode('green','The Green Web extension shows if a site is sustainably hosted');
+    var spanItem = document.createElement('span');
+    spanItem.id = 'thegreenwebenabled';
+
+    var text = document.createTextNode("The Green Web is enabled");
+
+    greenWebEnabledItem.appendChild(spanItem).appendChild(image).appendChild(text);
+
+    return greenWebEnabledItem;
 }
 
 function getLinkNode(color)

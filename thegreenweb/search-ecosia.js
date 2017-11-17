@@ -48,11 +48,17 @@ $(document).ready(function() {
           return;
         }
 
-        $('.search-filters-text').append("<span id='thegreenweb'>" + getLinkImage('green','The Green Web extension shows if a site is sustainably hosted') + ' The Green Web is enabled</span>');
-        var locs = {};
+        // Remove all tgwf links
+        $('#thegreenweb').remove();
 
-        // TODO This no longer works, we need an iframe approach, see : https://github.com/thegreenwebfoundation/chrome-extension/issues/1
+        var footer = document.getElementById("resultsContainer");
+        footer.appendChild(getFooterElement());
+
+        var locs = {};
         if ( $(".result").length > 0 ) {
+            // Remove all tgwf links
+            $('.TGWF').remove();
+
              $(".result").each(function (i) {
                  $(this).find('a').first().prepend($('<span>', { class: 'TGWF'}).append(getImageNode('greenquestion')).append('&nbsp;'));
                  var loc = getUrl($(this).find('a').first().attr('href'));

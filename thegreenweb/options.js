@@ -20,9 +20,13 @@ function save_options() {
   chrome.storage.local.set( {'tgwf_search_disabled' : value, 'tgwf_all_disabled': allvalue} , function() {
       // Update status to let user know options were saved.
     var status = document.getElementById("status");
-    status.innerHTML = "<div class=\"alert alert-success\">Options Saved.</div>";
+    var newDiv = document.createElement("div");
+
+    newDiv.className = "alert alert-success";
+    newDiv.appendChild(document.createTextNode("Options saved."));
+    status.appendChild(newDiv);
     setTimeout(function() {
-      status.innerHTML = "";
+      status.textContent = "";;
     }, 1500);
   })  
   
