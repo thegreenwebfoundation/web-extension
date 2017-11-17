@@ -11,16 +11,16 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
-            data = request.data;
+            var data = request.data;
 
             // Grab the current page url so we don't underlign same pages
-            currenturl = getUrl(document.URL);
+            var currenturl = getUrl(document.URL);
 
             $("a").not('.TGWF-addon').each(function (i) {
               var loc = $(this).attr('href');
               var strippedurl = getUrl(loc);
               if (loc && strippedurl) {
-                if (strippedurl == currenturl) {
+                if (strippedurl === currenturl) {
                     return true;
                 }
                 if (data[strippedurl]) {
@@ -30,8 +30,7 @@ chrome.runtime.onMessage.addListener(
                     .addClass('tgwf_green')
                     .qtip({
                       content: { text: function(api) { 
-                        title = getTitleWithLink(data[strippedurl]); 
-                        return title;
+                        return getTitleWithLink(data[strippedurl]);
                       }},
                       show: { delay: 700 },
                       hide: { fixed:true,  delay:500 },
@@ -53,7 +52,7 @@ chrome.runtime.onMessage.addListener(
  */
 $(document).ready(function() {
     chrome.storage.local.get("tgwf_all_disabled", function(items) {
-        if(items.tgwf_all_disabled == 1){
+        if (items && items.tgwf_all_disabled && items.tgwf_all_disabled === 1) {
           // Green web search is disabled, return
           return;
         }
@@ -64,14 +63,14 @@ $(document).ready(function() {
 function getUrlsAndSendRequest()
 {
   var locs = {};
-  $("a").not('.TGWF-addon').each(function (i) {
+  $("a").not('.TGWF-addon').each(function () {
        var loc = $(this).attr('href');
        var strippedurl = getUrl(loc);
        if (loc && strippedurl) {
          locs[strippedurl] = strippedurl
        }             
   });
-  if(Object.keys(locs).length > 0) {
+  if (Object.keys(locs).length > 0) {
       chrome.runtime.sendMessage({locs: locs}, function(response) {});
   }
 }

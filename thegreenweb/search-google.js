@@ -2,7 +2,7 @@
  * Google search pagemod functions
  *
  * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
- * @copyright Cleanbits/The Green Web Foundation 2010-2014
+ * @copyright Cleanbits/The Green Web Foundation 2010-2017
  */
 
 /**
@@ -11,12 +11,12 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
-            data = request.data;
+            var data = request.data;
             
             var links = $('.TGWF');
-            $(links).each(function (i) {
+            $(links).each(function () {
                 var loc = getUrl($(this).parent().attr('href'));
-                if(data[loc]){
+                if (data[loc]) {
                     $(this).html(getResultNode(data[loc]).append('&nbsp;'));
                 }
             });
@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(
  */
 $(document).ready(function() {
     chrome.storage.local.get("tgwf_search_disabled", function(items) {
-        if(items.tgwf_search_disabled == 1){
+        if (items && items.tgwf_search_disabled && items.tgwf_search_disabled === 1) {
           // Green web search is disabled, return
           return;
         }
@@ -38,7 +38,7 @@ $(document).ready(function() {
         (function checkLoop() {
             // Check if search results have 'greenweb' link
             var results = $('#res').find('h3.r > a');
-            if ( $('.TGWF').length != results.length) {
+            if ( $('.TGWF').length !== results.length) {
 
                 // Remove all cleanbits links
                 $('.TGWF').remove();
@@ -51,7 +51,7 @@ $(document).ready(function() {
                     var loc = getUrl($(this).attr('href'));
                     locs[loc] = loc;
                 });
-                if(Object.keys(locs).length > 0) {
+                if (Object.keys(locs).length > 0) {
                     chrome.runtime.sendMessage({locs: locs}, function(response) {});
                 }
             }

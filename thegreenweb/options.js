@@ -5,18 +5,16 @@
  * 1 = search disabled
  */
 function save_options() {
-  search = $('#searchon').attr('checked');
-  if(search == 'checked'){
+  var search = $('#searchon').attr('checked');
+  var value = 1;
+  if (search === 'checked') {
     value = 0;
-  }else{
-    value = 1;
   }
 
-  search = $('#allon').attr('checked');
-  if(search == 'checked'){
+  var allon = $('#allon').attr('checked');
+  var allvalue = 1;
+  if (allon === 'checked') {
     allvalue = 0;
-  }else{
-    allvalue = 1;
   }
 
   chrome.storage.local.set( {'tgwf_search_disabled' : value, 'tgwf_all_disabled': allvalue} , function() {
@@ -25,7 +23,7 @@ function save_options() {
     status.innerHTML = "<div class=\"alert alert-success\">Options Saved.</div>";
     setTimeout(function() {
       status.innerHTML = "";
-    }, 1500);    
+    }, 1500);
   })  
   
 }
@@ -39,7 +37,7 @@ function restore_options() {
   chrome.storage.local.get("tgwf_search_disabled", function(items) {
     var disable = items.tgwf_search_disabled;
     // 1 is disabled, 0 or not set is enabled
-    if(disable == 1){
+    if (disable === 1) {
       $('#searchoff').attr('checked','checked');
     } else {
       $('#searchon').attr('checked','checked');
@@ -48,7 +46,7 @@ function restore_options() {
   chrome.storage.local.get("tgwf_all_disabled", function(items) {
     var disable = items.tgwf_all_disabled;
     // 1 is disabled, 0 or not set is enabled
-    if(disable == 1){
+    if (disable === 1) {
       $('#alloff').attr('checked','checked');
     } else {
       $('#allon').attr('checked','checked');

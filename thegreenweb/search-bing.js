@@ -2,7 +2,7 @@
  * Bing search pagemod functions
  *
  * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
- * @copyright Cleanbits/The Green Web Foundation 2010-2014
+ * @copyright Cleanbits/The Green Web Foundation 2010-2017
  */
 
 /**
@@ -11,11 +11,12 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
-            data = request.data;
+            var data = request.data;
+
             $("#b_results").find("li").each(function (i) {
                 var loc = getUrl($(this).find('a').first().attr('href'));
 
-                if(data[loc]){
+                if (data[loc]) {
                     $(this).find('.TGWF').first()
                       .html(getResultNode(data[loc]).append('&nbsp;'))
                       .qtip({
@@ -55,7 +56,7 @@ $(document).ready(function() {
                  locs[loc] = loc;
              });
         }
-        if(Object.keys(locs).length > 0) {
+        if (Object.keys(locs).length > 0) {
             chrome.runtime.sendMessage({locs: locs}, function(response) {});
         }
     });
