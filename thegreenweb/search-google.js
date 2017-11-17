@@ -40,7 +40,7 @@ $(document).ready(function() {
             var results = $('#res').find('h3.r > a');
             if ( $('.TGWF').length !== results.length) {
 
-                // Remove all cleanbits links
+                // Remove all tgwf links
                 $('.TGWF').remove();
 
                 // Check urls to see if search results are green/grey

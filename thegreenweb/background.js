@@ -62,6 +62,12 @@ function isUrl(url)
   return true;
 }
 
+function getCurrentTime()
+{
+    var date = new Date();
+    return date.getTime();
+}
+
 /**
  * Do a greencheck api call if not cached
  *
@@ -70,8 +76,7 @@ function isUrl(url)
  */
 function getGreencheck(url, tabId)
 {
-  var date = new Date();
-  var currentTime = date.getTime();
+  var currentTime = getCurrentTime();
 
   var cache = window.localStorage.getItem(url);
   if (cache != null) {
@@ -135,7 +140,7 @@ function doRequest(url,tabId)
   xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
-          resp.time = currenttime;
+          resp.time = getCurrentTime();
           window.localStorage.setItem(url,JSON.stringify(resp));
           showIcon(resp,tabId);
       }
