@@ -122,11 +122,11 @@ function getImageNode(color)
 function getImagePath(file)
 {
     var icons = [];
-    icons['green']         = chrome.extension.getURL("/images/green20x20.gif");
-    icons['grey']          = chrome.extension.getURL("/images/grey20x20.gif");
-    icons['greenquestion'] = chrome.extension.getURL("/images/greenquestion20x20.gif");
-    icons['greenfan']      = chrome.extension.getURL("/images/greenfan20x20.gif");
-    icons['greenhouse']    = chrome.extension.getURL("/images/greenhouse20x20.gif");
+    icons['green']         = chrome.runtime.getURL("/images/green20x20.gif");
+    icons['grey']          = chrome.runtime.getURL("/images/grey20x20.gif");
+    icons['greenquestion'] = chrome.runtime.getURL("/images/greenquestion20x20.gif");
+    icons['greenfan']      = chrome.runtime.getURL("/images/greenfan20x20.gif");
+    icons['greenhouse']    = chrome.runtime.getURL("/images/greenhouse20x20.gif");
 
      if(icons[file]){
         return icons[file];

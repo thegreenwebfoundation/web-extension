@@ -72,6 +72,6 @@ function getUrlsAndSendRequest()
        }             
   });
   if(Object.keys(locs).length > 0) {
-      chrome.extension.sendMessage({locs: locs}, function(response) {});
+      chrome.runtime.sendMessage({locs: locs}, function(response) {});
   }
 }
