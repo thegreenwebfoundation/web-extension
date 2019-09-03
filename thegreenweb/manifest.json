@@ -181,12 +181,12 @@
     {
       "matches": ["http://*/*"],
       "css": ["thegreenweb.css","qtip/jquery.qtip.min.css"],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-all.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","green-page-links.js"]
     },
     {
       "matches": ["https://*/*"],
       "css": ["thegreenweb.css","qtip/jquery.qtip.min.css"],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-all.js"]
+      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","green-page-links.js"]
     }
   ]
 }
