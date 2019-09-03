@@ -51,8 +51,8 @@ $(document).ready(function() {
         // Remove all tgwf links
         $('#thegreenweb').remove();
 
-        var footer = document.getElementById("resultsContainer");
-        footer.appendChild(getFooterElement());
+        var footer = document.getElementsByClassName("small-footer");
+        footer[0].appendChild(getFooterElement());
 
         var locs = {};
         if ( $(".result").length > 0 ) {
