@@ -38,7 +38,7 @@ $(document).ready(function() {
 
         (function checkLoop() {
             // Check if search results have 'greenweb' link
-            var results = $('#res').find('h3.r > a');
+            var results = $('#res').find('.r > a');
             if ( $('.TGWF').length !== results.length) {
 
                 // Remove all tgwf links
