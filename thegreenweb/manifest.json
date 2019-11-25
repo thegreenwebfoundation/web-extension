@@ -167,7 +167,7 @@
       "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-google.js"]
     },
     {
-      "matches": ["*://search.yahoo.com/*"],
+      "matches": ["*://search.yahoo.com/*", "*://*.search.yahoo.com/*"],
       "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-yahoo.js"]
     },
     {
