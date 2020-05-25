@@ -21,7 +21,7 @@
     "48" : "/icons/48.gif",
     "128": "/icons/128.gif"
   },
-  "homepage_url": "http://www.thegreenwebfoundation.org/add-ons",
+  "homepage_url": "https://www.thegreenwebfoundation.org/add-ons",
   "page_action": {
     "default_icon": "icon.png",
     "default_title": "The Green Web"
@@ -31,7 +31,8 @@
     "images/greenfan20x20.gif",
     "images/greenhouse20x20.gif",
     "images/greenquestion20x20.gif",
-    "images/grey20x20.gif"
+    "images/grey20x20.gif",
+    "images/goldsmiley20x20.png"
   ],
   "permissions": [
         "http://api.thegreenwebfoundation.org/",

@@ -2,7 +2,7 @@
  * Chrome functions for The Green Web addon
  *
  * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
- * @copyright Cleanbits/The Green Web Foundation 2010-2017
+ * @copyright Cleanbits/The Green Web Foundation 2010-2020
  */
 
 /**
@@ -77,7 +77,7 @@ function getCurrentTime()
 function getGreencheck(url, tabId)
 {
   var currentTime = getCurrentTime();
-
+  
   var cache = window.localStorage.getItem(url);
   if (cache !== null) {
     // Item in cache, check cachetime

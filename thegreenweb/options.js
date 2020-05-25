@@ -1,3 +1,10 @@
+/*
+ * Options page
+ *
+ * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
+ * @copyright Cleanbits/The Green Web Foundation 2010-2020
+ */
+
 /**
  * Saves options to Chrome storage api.
  * 

@@ -2,7 +2,7 @@
  * Utilities for the greenweb add-on
  *
  * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
- * @copyright Cleanbits/The Green Web Foundation 2010-2014
+ * @copyright Cleanbits/The Green Web Foundation 2010-2020
  */
 
 /**
@@ -156,12 +156,13 @@ function getImagePath(file)
     icons.greenquestion = chrome.runtime.getURL("/images/greenquestion20x20.gif");
     icons.greenfan      = chrome.runtime.getURL("/images/greenfan20x20.gif");
     icons.greenhouse    = chrome.runtime.getURL("/images/greenhouse20x20.gif");
+    icons.goldsmiley    = chrome.runtime.getURL("/images/goldsmiley20x20.png");
 
      if (icons[file]) {
         return icons[file];
     }
 
-    return 'http://images.cleanbits.net/icons/' + file + "20x20.gif";
+    return 'https://api.thegreenwebfoundation.org/icons/' + file + "20x20.gif";
 }
 
 /**
@@ -227,14 +228,14 @@ function getTitleWithLink(data)
     }
     if (data.green) {
         if (data.hostedby) {
-            return data.url + ' ' + '<a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org/thegreenweb/#/providers/' + data.hostedbyid + '\'>' + ' is sustainably hosted by ' + ' ' + data.hostedby + '</a>';
+            return data.url + ' ' + '<a target=\'_blank\' href=\'https://www.thegreenwebfoundation.org/thegreenweb/#/providers/' + data.hostedbyid + '\'>' + ' is sustainably hosted by ' + ' ' + data.hostedby + '</a>';
         }
         return data.url + ' ' + 'is sustainably hosted';
     }
 
     if (data.data === false) {
         // No data available, show help message
-        return "No data available yet for this country domain. Wanna help? Contact us through "  + " <a target=\'_blank\' href=\'http://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
+        return "No data available yet for this country domain. Wanna help? Contact us through "  + " <a target=\'_blank\' href=\'https://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
     }
 
     // Data available, so show grey site
