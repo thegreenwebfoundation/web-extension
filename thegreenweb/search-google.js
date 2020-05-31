@@ -12,6 +12,7 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             var data = request.data;
+            console.log(request.filter);
             
             var links = $('.TGWF');
             $(links).each(function () {

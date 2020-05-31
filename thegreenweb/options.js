@@ -24,7 +24,14 @@ function save_options() {
     allvalue = 0;
   }
 
-  chrome.storage.local.set( {'tgwf_search_disabled' : value, 'tgwf_all_disabled': allvalue} , function() {
+  // Defaults to off, no filtering of search results
+  var filteron = $('#filteron').attr('checked');
+  var filtervalue = 0;
+  if (filteron === 'checked') {
+    filtervalue = 1;
+  }
+
+  chrome.storage.local.set( {'tgwf_search_disabled' : value, 'tgwf_all_disabled': allvalue, 'tgwf_filter_enabled': filtervalue} , function() {
       // Update status to let user know options were saved.
     var status = document.getElementById("status");
     var newDiv = document.createElement("div");
@@ -61,6 +68,15 @@ function restore_options() {
       $('#alloff').attr('checked','checked');
     } else {
       $('#allon').attr('checked','checked');
+    }
+  });
+  chrome.storage.local.get("tgwf_filter_enabled", function(items) {
+    var enable = items.tgwf_filter_enabled;
+    // 1 is disabled, 0 or not set is enabled
+    if (enable === 1) {
+      $('#filteron').attr('checked','checked');
+    } else {
+      $('#filteroff').attr('checked','checked');
     }
   });
 }
