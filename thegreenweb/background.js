@@ -14,6 +14,7 @@ chrome.runtime.onMessage.addListener(
     if (request.locs){
         doSearchRequest(request.locs,sender.tab);
     }
+    return true;
   }
 );
 
