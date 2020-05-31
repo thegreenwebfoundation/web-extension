@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener(
             $(links).each(function () {
                 var loc = getUrl($(this).parent().attr('href'));
                 if (data[loc]) {
-                    $(this).html(getResultNode(data[loc]).append('&nbsp;'));
+                    $(this).html(getResultNode(data[loc], 'google').append('&nbsp;'));
                 }
             });
         }

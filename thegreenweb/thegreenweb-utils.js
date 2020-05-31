@@ -127,11 +127,16 @@ function getFooterElement()
  * @param color
  * @returns {void | * | jQuery}
  */
-function getLinkNode(color)
+function getLinkNode(color, type)
 {
+    var style = 'width:16px; height:16px;border:none;';
+    if(type === 'google') {
+        style = 'width:16px; height:16px;border:none; margin-left:-20px; margin-top:2px';
+    }
+
     var href = 'http://www.thegreenwebfoundation.org';
     return $("<a>", { href: href, class: 'TGWF-addon' })
-                 .append($('<img>', { src: getImagePath(color), style: 'width:16px; height:16px;border:none;'  } ));
+                 .append($('<img>', { src: getImagePath(color), style: style   } ));
 }
 
 /**
@@ -178,9 +183,9 @@ function getImagePath(file, local)
 /**
  * Get the resulting image from the data as jquery dom node
  */
-function getResultNode(data)
+function getResultNode(data, type)
 {
-    return getLinkNode(getIcon(data));
+    return getLinkNode(getIcon(data), type);
 }
 
 /**
