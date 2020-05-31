@@ -148,7 +148,7 @@ function getImageNode(color)
 /**
  * Get the image path based on file
  */
-function getImagePath(file)
+function getImagePath(file, local)
 {
     var icons = {};
     icons.green         = chrome.runtime.getURL("/images/green20x20.gif");
@@ -160,6 +160,16 @@ function getImagePath(file)
 
      if (icons[file]) {
         return icons[file];
+    }
+
+     if (local) {
+         return chrome.runtime.getURL("/images/green20x20.gif");
+     }
+
+    // if the file has http as it's start, it's a full url to a web icon somewhere else, so then return that.
+    var prot = file.substring(0,4);
+    if (prot === 'http') {
+        return file;
     }
 
     return 'https://api.thegreenwebfoundation.org/icons/' + file + "20x20.gif";
