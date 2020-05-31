@@ -127,11 +127,16 @@ function getFooterElement()
  * @param color
  * @returns {void | * | jQuery}
  */
-function getLinkNode(color)
+function getLinkNode(color, type)
 {
+    var style = 'width:16px; height:16px;border:none;';
+    if(type === 'google') {
+        style = 'width:16px; height:16px;border:none; margin-left:-20px; margin-top:2px';
+    }
+
     var href = 'http://www.thegreenwebfoundation.org';
     return $("<a>", { href: href, class: 'TGWF-addon' })
-                 .append($('<img>', { src: getImagePath(color), style: 'width:16px; height:16px;border:none;'  } ));
+                 .append($('<img>', { src: getImagePath(color), style: style   } ));
 }
 
 /**
@@ -148,7 +153,7 @@ function getImageNode(color)
 /**
  * Get the image path based on file
  */
-function getImagePath(file)
+function getImagePath(file, local)
 {
     var icons = {};
     icons.green         = chrome.runtime.getURL("/images/green20x20.gif");
@@ -162,15 +167,25 @@ function getImagePath(file)
         return icons[file];
     }
 
+     if (local) {
+         return chrome.runtime.getURL("/images/green20x20.gif");
+     }
+
+    // if the file has http as it's start, it's a full url to a web icon somewhere else, so then return that.
+    var prot = file.substring(0,4);
+    if (prot === 'http') {
+        return file;
+    }
+
     return 'https://api.thegreenwebfoundation.org/icons/' + file + "20x20.gif";
 }
 
 /**
  * Get the resulting image from the data as jquery dom node
  */
-function getResultNode(data)
+function getResultNode(data, type)
 {
-    return getLinkNode(getIcon(data));
+    return getLinkNode(getIcon(data), type);
 }
 
 /**

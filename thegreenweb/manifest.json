@@ -3,7 +3,7 @@
   "update_url":"http://clients2.google.com/service/update2/crx",
   "name": "The Green Web",
   "short_name": "The Green Web",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
     "scripts": ["background.js","thegreenweb-utils.js","tracker.js"],
