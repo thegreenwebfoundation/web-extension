@@ -160,7 +160,7 @@ function doRequest(url,tabId)
 */
 function showIcon(resp,tabId)
 {
-    var icon  = getImagePath(getIcon(resp));
+    var icon  = getImagePath(getIcon(resp), true);
     var title = getTitle(resp);
     chrome.pageAction.setIcon({'tabId' : tabId, 'path' : icon});
     chrome.pageAction.setTitle({'tabId' : tabId, 'title' : title});
