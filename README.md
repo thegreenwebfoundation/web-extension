@@ -39,12 +39,18 @@ For Firefox:
   5. Happy with the changes? Do a commit and make a pull request
   
 ## Publishing hints
+### Chrome
   1. After step 5 of the chrome development above, zip up thegreenweb directory into thegreenweb.zip
   2. login on the chrome webstore developer console : https://chrome.google.com/u/3/webstore/devconsole
   3. Go to the thegreenweb item and upload a new package and click on publish. 
   4. it might complain about extended permissions, for now we run this on every website so we need broad host permissions. 
   Just click submit for review/publish. 
   
+### Firefox
+  1. after step 5 of the firefox development above, run `web-ext build' inside the `thegreenweb/` folder
+  2. This will create a file in `thegreenweb/web-ext-artifacts` named `the_green_web-x.x.x.zip` where x.x.x is the version number in the manifest.json file
+  3. Login to the addons.mozilla.org page and go to our addon to sumbit a new version
+  4. add some version details and then click submit so they can review it.   
   
 ### Found a bug?
 
