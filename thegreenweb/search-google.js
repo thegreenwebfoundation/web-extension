@@ -12,13 +12,15 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.data){
             var data = request.data;
-            console.log(request.filter);
-            
             var links = $('.TGWF');
             $(links).each(function () {
                 var loc = getUrl($(this).parent().attr('href'));
                 if (data[loc]) {
                     $(this).html(getResultNode(data[loc], 'google').append('&nbsp;'));
+                    if(request.filter && data[loc].green === false) {
+                        // remove full result from the page
+                        $(this).parents('.rc').hide();
+                    }
                 }
             });
         }
