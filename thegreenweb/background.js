@@ -97,6 +97,7 @@ function getGreencheck(url, tabId)
 function doSearchRequest(data,tab)
 {
   var length = Object.keys(data).length;
+  // We ignore sites with more than a 100 urls
   if (length <= 100){
     var sites = Object.getOwnPropertyNames(data).splice(0,50);
     var sitesUrl = JSON.stringify(sites);
@@ -120,15 +121,21 @@ function doSearchRequest(data,tab)
  */
 function doApiRequest(sitesUrl, tab)
 {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-          var resp = JSON.parse(xhr.responseText);
-          chrome.tabs.sendMessage(tab.id, {data: resp}, function(response) {});
-      }
-    }
-    xhr.send();
+    chrome.storage.sync.get("tgwf_filter_enabled", function(items) {
+        var filter = false;
+        if (items && items.tgwf_filter_enabled && items.tgwf_filter_enabled === "1") {
+            filter = true;
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                var resp = JSON.parse(xhr.responseText);
+                chrome.tabs.sendMessage(tab.id, {data: resp, filter}, function(response) {});
+            }
+        }
+        xhr.send();
+    });
 }
 
 /**
