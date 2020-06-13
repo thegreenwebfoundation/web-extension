@@ -32,7 +32,11 @@ chrome.runtime.onMessage.addListener(
                     $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green'});
                   } else {
                     $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light'});
-                  }                
+                  }
+                    if(request.filter && data[loc].green === false) {
+                        // remove full result from the page
+                        $(this).hide();
+                    }
                 }
             });
         }

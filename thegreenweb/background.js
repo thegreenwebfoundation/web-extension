@@ -97,6 +97,7 @@ function getGreencheck(url, tabId)
 function doSearchRequest(data,tab)
 {
   var length = Object.keys(data).length;
+  // We ignore sites with more than a 100 urls
   if (length <= 100){
     var sites = Object.getOwnPropertyNames(data).splice(0,50);
     var sitesUrl = JSON.stringify(sites);
