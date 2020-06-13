@@ -120,9 +120,9 @@ function doSearchRequest(data,tab)
  */
 function doApiRequest(sitesUrl, tab)
 {
-    chrome.storage.local.get("tgwf_filter_enabled", function(items) {
+    chrome.storage.sync.get("tgwf_filter_enabled", function(items) {
         var filter = false;
-        if (items && items.tgwf_filter_enabled && items.tgwf_filter_enabled === 1) {
+        if (items && items.tgwf_filter_enabled && items.tgwf_filter_enabled === "1") {
             filter = true;
         }
         var xhr = new XMLHttpRequest();

@@ -43,8 +43,8 @@ chrome.runtime.onMessage.addListener(
  * If document is ready, find the urls to check
  */
 $(document).ready(function() {
-    chrome.storage.local.get("tgwf_search_disabled", function(items) {
-        if (items && items.tgwf_search_disabled && items.tgwf_search_disabled === 1) {
+    chrome.storage.sync.get("tgwf_search_disabled", function(items) {
+        if (items && items.tgwf_search_disabled && items.tgwf_search_disabled === "1") {
           // Green web search is disabled, return
           return;
         }
