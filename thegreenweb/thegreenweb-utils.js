@@ -158,9 +158,9 @@ function getImagePath(file, local)
     var icons = {};
     icons.green         = chrome.runtime.getURL("/images/green20x20transp.png");
     icons.grey          = chrome.runtime.getURL("/images/grey20x20transp.png");
-    icons.greenquestion = chrome.runtime.getURL("/images/greenquestion20x20.gif");
-    icons.greenfan      = chrome.runtime.getURL("/images/greenfan20x20.gif");
-    icons.greenhouse    = chrome.runtime.getURL("/images/greenhouse20x20.gif");
+    icons.greenquestion = chrome.runtime.getURL("/images/question20x20transp.png");
+    icons.greenfan      = chrome.runtime.getURL("/images/greenfan20x20transp.png");
+    icons.greenhouse    = chrome.runtime.getURL("/images/greenhouse20x20transp.png");
     icons.goldsmiley    = chrome.runtime.getURL("/images/gold20x20transp.png");
 
      if (icons[file]) {
