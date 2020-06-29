@@ -29,7 +29,10 @@
     "images/greenhouse20x20.gif",
     "images/greenquestion20x20.gif",
     "images/grey20x20.gif",
-    "images/goldsmiley20x20.png"
+    "images/goldsmiley20x20.png",
+    "images/gold20x20transp.png",
+    "images/green20x20transp.png",
+    "images/grey20x20transp.png"
   ],
   "permissions": [
         "http://api.thegreenwebfoundation.org/",
