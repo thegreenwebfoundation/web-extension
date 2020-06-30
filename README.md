@@ -3,9 +3,9 @@ The Green Web web-extension
 
 The Green Web Addon 
 
-Tested on Chrome, Brave and Firefox
+Tested on Chrome, Brave, Opera and Firefox
 
-Should also work on other browsers with web-extensions support like Opera and Edge (not tested yet)
+Should also work on other browsers with web-extensions support like Edge (not tested yet)
 
 ## Usage
 
@@ -16,6 +16,9 @@ For Chrome, Brave:
   
 For Firefox:
   https://addons.mozilla.org/nl/firefox/addon/the-green-web/
+
+For Opera:
+  https://addons.opera.com/nl/extensions/details/the-green-web/
 
 ## Want to help?
 
@@ -37,6 +40,9 @@ For Firefox:
   3. Run `web-ext run` inside the `thegreenweb/` folder
   4. Make your changes, test them out (use ctrl+r in the terminal where web-ext is running to reload)
   5. Happy with the changes? Do a commit and make a pull request
+
+### Development on Opera
+  1. See steps from Chrome but use Opera instead
   
 ## Publishing hints
 ### Chrome
@@ -51,6 +57,10 @@ For Firefox:
   2. This will create a file in `thegreenweb/web-ext-artifacts` named `the_green_web-x.x.x.zip` where x.x.x is the version number in the manifest.json file
   3. Login to the addons.mozilla.org page and go to our addon to sumbit a new version
   4. add some version details and then click submit so they can review it.   
+  
+### Opera
+  1. After step 5, launch opera and click pack extension. Get the private key from AJ
+  2. Submit this crx to the opera webstore  
   
 ### Found a bug?
 

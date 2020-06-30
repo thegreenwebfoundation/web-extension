@@ -87,7 +87,7 @@ function stripPortFromUrl(loc)
 function getGreenwebLinkNode(color, tooltip)
 {
     var aItem = document.createElement("a");
-    aItem.href  = 'http://www.thegreenwebfoundation.org';
+    aItem.href  = 'https://www.thegreenwebfoundation.org';
     aItem.class = 'TGWF-addon';
     aItem.title = tooltip;
 
@@ -134,7 +134,7 @@ function getLinkNode(color, type)
         style = 'width:16px; height:16px;border:none; margin-left:-20px; margin-top:2px';
     }
 
-    var href = 'http://www.thegreenwebfoundation.org';
+    var href = 'https://www.thegreenwebfoundation.org';
     return $("<a>", { href: href, class: 'TGWF-addon' })
                  .append($('<img>', { src: getImagePath(color), style: style   } ));
 }
