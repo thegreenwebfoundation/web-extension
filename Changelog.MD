@@ -1,6 +1,7 @@
 Release notes:
+
 2.3.0 | 30 June 2020
-New transparent icons for dark mode and better looking
+- New transparent icons for dark mode and better looking
 
 2.2.0 | 13 June 2020
 - Add an ethical filtering option, when you enable this option, on search pages results that normally will get a grey smiley as they run on non-green infrastructure will now be filtered out from the webpage, so they are hidden from view. 
