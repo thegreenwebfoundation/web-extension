@@ -60,7 +60,7 @@ For Opera:
   
 ### Opera
   1. After step 5, launch opera and click pack extension. Get the private key from AJ
-  2. Submit this crx to the opera webstore  
+  2. Submit this crx to the opera webstore at  https://addons.opera.com/developer/package/133065/
   
 ### Found a bug?
 
