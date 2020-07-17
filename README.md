@@ -65,3 +65,11 @@ For Opera:
 ### Found a bug?
 
   1. Make an issue on this repository and we'll look into it
+
+
+## Credits
+
+This project uses the [Chrome Web Store Sketch assets template][cws-sketch-template], by [Jean Francois Goncalves][jfg].
+
+[cws-sketch-template]: https://www.sketchappsources.com/free-source/409-chrome-web-store-assets-template.html
+[jfg]: https://www.sketchappsources.com/contributor/jfgoncalves
