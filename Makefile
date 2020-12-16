@@ -3,11 +3,10 @@ dev.firefox:
 	npx web-ext run --verbose
 
 build.css:
-	NODE_ENV=production npx tailwindcss build ./thegreenweb/tailwind.css -o ./thegreenweb/tailwind.dist.css
-
+	NODE_ENV=production npx postcss -c postcss.config.js ./thegreenweb/tailwind.css   -o ./thegreenweb/style.css
 
 dev.css:
-	npx tailwindcss build ./thegreenweb/tailwind.css -o ./thegreenweb/tailwind.dist.css
-	
+	npx postcss -c postcss.config.js ./thegreenweb/tailwind.css   -o ./thegreenweb/style.css
+
 watch.css:
-	npx postcss -c postcss.config.js ./thegreenweb/tailwind.css   -o ./thegreenweb/style.css --watch
+	npx postcss -c postcss.config.js ./thegreenweb/tailwind.css  -o ./thegreenweb/style.css --watch

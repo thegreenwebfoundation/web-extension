@@ -4,3 +4,8 @@
 thegreenweb.zip
 thegreenweb/web-ext-artifacts/*
 node_modules
+
+.DS_Store
+
+# this is auto generated with tailwind now
+style.css
