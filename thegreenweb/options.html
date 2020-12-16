@@ -1,40 +1,149 @@
+<!DOCTYPE html>
 <html>
+
 <head>
+	<meta charset="UTF-8" />
 	<title>The Green Web Options</title>
-	<script src="jquery.min.js"></script>
-	<script src='options.js'></script>
+	<link href="style.css" rel="stylesheet">
+
 </head>
+
 <body>
-	<div class="container">
-		<h1><img src='/images/green20x20.gif'/> The Green Web</h1>
-	  	<div id='status'></div>
-	  		<div id='search' class="well">
-			<h3>The Green Web Search:</h3>
-			<p>The Green Web Search adds the different green web icons to search results for the Google, Yahoo, Bing and Ecosia search engines. <br/> Check out the <a href='https://www.thegreenwebfoundation.org/add-ons/'>addonpage</a> for information on the different icons and how it works.</p>
-			<input type='radio' name='search' id='searchon' value='0' checked='checked' />Enabled<br/>
-			<input type='radio' name='search' id='searchoff' value='1'/>Disabled<br/>
-			<br/>
-			<div class='alert' style="background-color: yellow;">Reload search pages for this setting to take effect. </div>
+	<div class="">
+
+		<div class="container max-w-3xl
+		 mx-auto font-sans">
+
+			<div class="py-4">
+				<img src="images/top-logo-greenweb.png" alt="The Green Web Foundation Logo" />
 			</div>
 
-			<div id='filter' class="well">
-			<h3>The Green Web Ethical filter:</h3>
-			<p>If you enable the green web search, you can also enable filtering, meaning that any grey results will not be shown anymore.</p>
-			<input type='radio' name='filter' id='filteron' value='1'  />Enabled<br/>
-			<input type='radio' name='filter' id='filteroff' value='0'  checked='checked'/>Disabled<br/>
-			<br/>
-			<div class='alert' style="background-color: yellow;">Reload search pages for this setting to take effect. </div>
+			<div class="feature-green-web-search border-b-2">
+				<form class="tgwf-settings">
+
+					<div class="py-3 flex">
+						<div class="flex-grow">
+							<h3 class="text-xl">The Green Web Search:</h3>
+						</div>
+
+						<div class="toggle-search">
+							<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+								<input type="checkbox" name="toggle-web-search" id="toggle-web-search"
+									class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
+								<label for="toggle"
+									class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="py-2 flex space-x-4 pb-6">
+
+						<p class="text-sm">
+							The Green Web Search adds the different green web icons to search results for the Google, Yahoo, Bing and
+							Ecosia search engines. Check out the <a
+								href='https://www.thegreenwebfoundation.org/add-ons/'>addonpage</a>
+							for information on the different icons and how it works.
+						</p>
+					</div>
+
+					<div class="feature-ethical-filter  border-b-2">
+
+						<div class="py-3 flex">
+							<div class="flex-grow">
+								<h3 class="text-xl">The Green Web Ethical filter:</h3>
+							</div>
+
+							<div class="toggle-search">
+								<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+									<input type="checkbox" name="toggle-ethical-filter" id="toggle-ethical-filter"
+										class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
+									<label for="toggle"
+										class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+								</div>
+
+
+							</div>
+						</div>
+
+						<div class="py-2 flex space-x-4 pb-6">
+							<p class="text-sm">
+								If you enable the green web search, you can also enable filtering, meaning that any grey results will
+								not be
+								shown anymore.
+							</p>
+						</div>
+
+					</div>
+
+					<div class="feature-link-check border-b-2">
+						<div class="py-3 flex">
+							<div class="flex-grow">
+								<h3 class="text-xl">The Green Web for all external links:</h3>
+							</div>
+
+							<div class="toggle-search">
+								<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+									<input type="checkbox" name="toggle-link-check" id="toggle-link-check"
+										class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
+									<label for="toggle"
+										class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="py-2 flex space-x-4 pb-6">
+
+							<p class="text-sm">
+								The Green Web can also be used to check all extenal links on a page. All links to other domains that are
+								greenly hosted will be green underlined. Hovering over those links will show a small popup with more
+								information.
+							</p>
+						</div>
+
+					</div>
+
+					<div class="privacy-reminder py-3">
+						<p class="text-sm text-gray-500">
+
+							To check that page or link if is hosted green, this extension needs to send its domain name against to The
+							Green Web Foundation Greencheck API. No other information is sent to other than this domain name, and
+							these
+							features can be switched on or off at any time. If you want to know more, <a
+								class="text-tgwf-green hover:underline"
+								href="https://www.thegreenwebfoundation.org/privacy-statement">please see our privacy statement for more
+								details.<a /> </p>
+					</div>
+
+					<div class="py-6 px-4">
+						<button name="save"
+							class="bg-tgwf-green focus:bg-white btn focus:border-tgwf-green text-white border-gray-50 focus:text-tgwf-green	transform hover:scale-110 transition	 p-2 border px-8">
+							Save
+						</button>
+
+						<button name="reset" class="bg-gray-100 btn border-gray-50 p-2 text-black px-8">
+							Reset
+						</button>
+					</div>
+
+					<div id="announcement"
+						class="duration-300 transition-opacity max-w-2xl mx-auto p-5 bg-green-50 round m-4 hidden opacity-0"
+						role="alert">
+						<div class="dismiss">
+							<button
+								class="float-right border text-red-500 text-white rounded p-1 text-sm ml-2">
+								close
+							</button>
+						</div>
+						<span class="message">
+						</span>
+					</div>
+				</form>
 			</div>
-			
-			<div id='alllinks' class="well">
-			<h3>The Green Web for all external links:</h3>
-			<p>The Green Web can also be used to check all extenal links on a page. All links to other domains that are greenly hosted will be green underlined. Hovering over those links will show a small popup with more information. </p>
-			<input type='radio' name='all' id='allon' value='0' checked='checked' />Enabled<br/>
-			<input type='radio' name='all' id='alloff' value='1'/>Disabled<br/>
-			</div>
-			
-			<button class='btn btn-primary'>Save</button>
-	
-	</div>
+
+			<script src='browser-polyfill.min.js'></script>
+			<script src='options.js'></script>
 </body>
+
 </html>
