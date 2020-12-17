@@ -14,9 +14,9 @@ browser.runtime.onMessage.addListener(
     if (request.locs) {
       doSearchRequest(request.locs, sender.tab);
     }
-    // return new Promise(function(resolve, reject) {
-    //   resolve(true)
-    // })
+    // Instead of returning true, we return a promise that
+    // resolves to true, as runtime.sendMessage now uses
+    // Promises
     return Promise.resolve(true)
   }
 
@@ -115,27 +115,34 @@ function doSearchRequest(data, tab) {
 }
 
 /**
- * Do an api request for multiple sites
+ * Do an api request for multiple sites.
+ * After checking the sites returns the result,
+ * plus whether to filter the grey results from the page
  *
- * @param sitesUrl
+ * @param siteDomains
  * @param tab
  */
-function doApiRequest(sitesUrl, tab) {
-  console.debug("background:api request")
-  const req = browser.storage.local.get("tgwf_filter_enabled")
+function doApiRequest(siteDomains, tab) {
+  console.debug("background:doApiRequest")
+  const req = browser.storage.local.get("filter-out-grey-search-results")
   req.then(function (items) {
 
-    var filter = false;
-    if (items && !items.tgwf_filter_enabled) {
-      filter = true;
-    }
+    const filterOutGreyResults = items && items['filter-out-grey-search-results']
+
+
+    console.debug("background:doApiRequest", { siteDomains })
+
 
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://api.thegreenwebfoundation.org/v2/greencheckmulti/" + sitesUrl, true);
+
+    xhr.open("GET", "https://api.thegreenwebfoundation.org/v2/greencheckmulti/" + siteDomains, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
-        var resp = JSON.parse(xhr.responseText);
-        browser.tabs.sendMessage(tab.id, { data: resp, filter }, function (response) { });
+        var greenChecks = JSON.parse(xhr.responseText);
+
+        // send the checked urls back to the tab that made the request
+        console.debug("background:doApiRequest", { greenChecks })
+        browser.tabs.sendMessage(tab.id, { data: greenChecks, filterOutGreyResults });
       }
     }
     xhr.send();

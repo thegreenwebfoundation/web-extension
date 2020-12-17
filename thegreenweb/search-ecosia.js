@@ -5,58 +5,64 @@
  * @copyright Cleanbits/The Green Web Foundation 2010-2020
  */
 /**
- * On Request, find all hrefs and assign green or grey icon
+ * Accept a message containing data, an object containing the domain, and green state
  */
-chrome.runtime.onMessage.addListener(
-  function (request, sender, sendResponse) {
-    if (request.data) {
-      var data = request.data;
+function annotateAndFilterSearchResults(message, sender) {
+  console.debug("TGWF:search:ecosia:annotateAndFilterSearchResults")
+  console.debug("message", message)
+  if (message.data) {
+    var data = message.data;
 
-      $(".result").each(function () {
-        var loc = getUrl($(this).find('a').first().attr('href'));
-
-        if (data[loc]) {
-          $(this).find('.TGWF').first()
-            .html(getResultNode(data[loc]))
-            .qtip({
-              content: {
-                text: function (api) {
-                  return getTitleWithLink(data[loc]);
-                }
-              },
-              show: { delay: 700 },
-              hide: { fixed: true, delay: 500 }
-            });
+    $(".result").each(function () {
+      var loc = getUrl($(this).find('a').first().attr('href'));
 
 
-          if (data[loc].green) {
-            $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green' });
-          } else {
-            $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light' });
-          }
+      if (data[loc]) {
+        $(this).find('.TGWF').first()
+          .html(getResultNode(data[loc]))
+          .qtip({
+            content: {
+              text: function (api) {
+                return getTitleWithLink(data[loc]);
+              }
+            },
+            show: { delay: 700 },
+            hide: { fixed: true, delay: 500 }
+          });
 
 
-          if (request.filter && data[loc].green === false) {
-            // remove full result from the page
-            $(this).hide();
-          }
+        if (data[loc].green) {
+          $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green' });
+        } else {
+          $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light' });
         }
-      });
-    }
-    return true;
-  });
+
+        // remove link if it's not green and we have filtering enabled
+        if (message.filter && data[loc].green === false) {
+          // remove full result from the page
+          $(this).hide();
+        }
+      }
+    });
+  }
+  return true;
+}
+
+chrome.runtime.onMessage.addListener(annotateAndFilterSearchResults);
 
 
 /**
  * If document is ready, find the urls to check
  */
 $(document).ready(function () {
-  console.log("TGWF:search:ecosia")
+  console.debug("TGWF:search:ecosia:ready")
 
-  const req = browser.storage.local.get("tgwf_search_disabled")
+  const req = browser.storage.local.get("annotate-search-results")
   req.then(function (items) {
-    if (items && items.tgwf_search_disabled) {
-      console.debug("Green web search is disabled, return")
+    const annotateSearchResults = items && items['annotate-search-results']
+
+    if (!annotateSearchResults) {
+      console.debug("Green web search is disabled, returning early")
       return;
     }
 
@@ -75,7 +81,7 @@ $(document).ready(function () {
 
       $(".result").each(function (i) {
 
-        // add question mark
+        // add question mark, while we wait for a response for our greencheck
         $(this).find('a').first().prepend($('<span>', { class: 'TGWF' }).append(getImageNode('greenquestion')).append('&nbsp;'));
 
         // make a note of the link, to pull out the domain
