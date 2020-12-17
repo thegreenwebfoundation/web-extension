@@ -1,12 +1,11 @@
-dev.firefox:
-	cd thegreenweb
-	npx web-ext run --verbose
+firefox.dev:
+	npm run firefox:dev
 
-build.css:
-	NODE_ENV=production npx postcss -c postcss.config.js ./thegreenweb/tailwind.css   -o ./thegreenweb/style.css
+css.dist:
+	npm run css:dist
 
-dev.css:
-	npx postcss -c postcss.config.js ./thegreenweb/tailwind.css   -o ./thegreenweb/style.css
+css.build:
+	npm run css:build
 
-watch.css:
-	npx postcss -c postcss.config.js ./thegreenweb/tailwind.css  -o ./thegreenweb/style.css --watch
+css.watch:
+	npm run css:watch

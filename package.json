@@ -17,7 +17,12 @@
     "web-ext": "^5.4.1",
     "webextension-polyfill": "^0.7.0"
   },
-  "scripts": {},
+  "scripts": {
+    "css:dist": "NODE_ENV=production npm run css:build",
+    "css:build": "postcss -c ../postcss.config.js ./thegreenweb/tailwind.css -o ./thegreenweb/style.css",
+    "css:watch": "postcss -c postcss.config.js ./thegreenweb/tailwind.css  -o ./thegreenweb/style.css --watch",
+    "firefox:dev": "web-ext run --verbose"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thegreenwebfoundation/web-extension.git"
