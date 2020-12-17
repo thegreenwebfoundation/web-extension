@@ -5,6 +5,7 @@
  * @copyright Cleanbits/The Green Web Foundation 2010-2020
  */
 
+
 /**
  * If document is ready, find the urls to check
  */
@@ -34,15 +35,15 @@ function annotateLinksInDom(data) {
       }
       const domainResult = data[strippedurl]
 
-      if (data[strippedurl]) {
+      if (domainResult) {
 
-        if (data[strippedurl].green) {
+        if (domainResult.green) {
           $(this)
             .addClass('tgwf_green')
             .qtip({
               content: {
                 text: function (api) {
-                  return getTitleWithLink(data[strippedurl]);
+                  return getTitleWithLink(domainResult);
                 }
               },
               show: { delay: 700 },

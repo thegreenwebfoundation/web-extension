@@ -142,7 +142,9 @@ function doApiRequest(siteDomains, tab) {
 
         // send the checked urls back to the tab that made the request
         console.debug("background:doApiRequest", { greenChecks })
-        browser.tabs.sendMessage(tab.id, { data: greenChecks, filterOutGreyResults });
+        browser.tabs.sendMessage(tab.id, {
+          data: greenChecks, filter: filterOutGreyResults
+        });
       }
     }
     xhr.send();
