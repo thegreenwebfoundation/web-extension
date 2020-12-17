@@ -6,11 +6,10 @@
   "version": "2.4.0",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
-    "scripts": ["background.js","thegreenweb-utils.js"],
+    "scripts": ["background.js", "thegreenweb-utils.js"],
     "persistent": false
   },
   "minimum_chrome_version" : "22",
-  "options_page": "options.html",
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
@@ -34,6 +33,7 @@
     "images/greenfan20x20.gif",
     "images/greenhouse20x20.gif",
     "images/greenquestion20x20.gif",
+    "images/question20x20transp.png",
     "images/grey20x20.gif",
     "images/goldsmiley20x20.png",
     "images/gold20x20transp.png",
@@ -173,29 +173,29 @@
             "*://*.google.kz/*",
             "*://*.google.co.uz/*"
                 ],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-google.js"]
+      "js": ["jquery.min.js", "browser-polyfill.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-google.js"]
     },
     {
       "matches": ["*://search.yahoo.com/*", "*://*.search.yahoo.com/*"],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-yahoo.js"]
+      "js": ["jquery.min.js", "browser-polyfill.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-yahoo.js"]
     },
     {
       "matches": ["*://www.bing.com/*"],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-bing.js"]
+      "js": ["jquery.min.js", "browser-polyfill.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-bing.js"]
     },
     {
       "matches": ["*://www.ecosia.org/*"],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-ecosia.js"]
+      "js": ["jquery.min.js", "browser-polyfill.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","search-ecosia.js"]
     },
     {
       "matches": ["http://*/*"],
       "css": ["thegreenweb.css","qtip/jquery.qtip.min.css"],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","green-page-links.js"]
+      "js": ["jquery.min.js", "browser-polyfill.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","green-page-links.js"]
     },
     {
       "matches": ["https://*/*"],
       "css": ["thegreenweb.css","qtip/jquery.qtip.min.css"],
-      "js": ["jquery.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","green-page-links.js"]
+      "js": ["jquery.min.js", "browser-polyfill.min.js", "thegreenweb-utils.js","qtip/jquery.qtip.min.js","green-page-links.js"]
     }
   ]
 }
