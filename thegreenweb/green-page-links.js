@@ -10,17 +10,17 @@
  * If document is ready, find the urls to check
  */
 // accept a object of form:
-{
-  "www.google.com": {
-    data: true
-    green: true
-    hostedby: "Google Inc."
-    hostedbyid: 595
-    hostedbywebsite: "www.google.com"
-    partner: null
-    url: "www.google.com"
-  }
-}
+// {
+//   "www.google.com": {
+//     data: true
+//     green: true
+//     hostedby: "Google Inc."
+//     hostedbyid: 595
+//     hostedbywebsite: "www.google.com"
+//     partner: null
+//     url: "www.google.com"
+//   }
+// }
 function annotateLinksInDom(data) {
   var currenturl = getUrl(document.URL);
   console.log({ data })
