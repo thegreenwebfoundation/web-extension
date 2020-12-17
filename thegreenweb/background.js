@@ -8,14 +8,21 @@
 /**
  * On request, send the data to the green web api
  */
-chrome.runtime.onMessage.addListener(
+browser.runtime.onMessage.addListener(
   function(request, sender, sendResponse)
+
   {
+    console.debug({sender: sender.url})
     if (request.locs){
         doSearchRequest(request.locs,sender.tab);
     }
-    return true;
+    // return new Promise(function(resolve, reject) {
+    //   resolve(true)
+    // })
+    return Promise.resolve(true)
   }
+
+
 );
 
 /**
@@ -24,7 +31,7 @@ chrome.runtime.onMessage.addListener(
 function doGreencheckForTabReplace(details)
 {
     var tabId = details.tabId;
-    chrome.tabs.get(tabId, function(tab){
+    browser.tabs.get(tabId, function(tab){
             if (tab && tab.url) {
                 var url = tab.url;
                 tabId = tab.id;
@@ -40,10 +47,10 @@ function doGreencheckForTabReplace(details)
     );
 }
 
-chrome.webNavigation.onCommitted.addListener(function(details){
+browser.webNavigation.onCommitted.addListener(function(details){
     doGreencheckForTabReplace(details);
 });
-chrome.tabs.onActivated.addListener(function(details){
+browser.tabs.onActivated.addListener(function(details){
     doGreencheckForTabReplace(details);
 });
 
@@ -121,17 +128,21 @@ function doSearchRequest(data,tab)
  */
 function doApiRequest(sitesUrl, tab)
 {
-    chrome.storage.sync.get("tgwf_filter_enabled", function(items) {
+  console.debug("background:api request")
+    const req = browser.storage.local.get("tgwf_filter_enabled")
+    req.then(function(items) {
+
         var filter = false;
-        if (items && items.tgwf_filter_enabled && items.tgwf_filter_enabled === "1") {
+        if (items && !items.tgwf_filter_enabled) {
             filter = true;
         }
+
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"+sitesUrl, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 var resp = JSON.parse(xhr.responseText);
-                chrome.tabs.sendMessage(tab.id, {data: resp, filter}, function(response) {});
+                browser.tabs.sendMessage(tab.id, {data: resp, filter}, function(response) {});
             }
         }
         xhr.send();
@@ -163,11 +174,11 @@ function showIcon(resp,tabId)
 {
     var icon  = getImagePath(getIcon(resp), true);
     var title = getTitle(resp);
-    chrome.pageAction.setIcon({'tabId' : tabId, 'path' : icon});
-    chrome.pageAction.setTitle({'tabId' : tabId, 'title' : title});
-    chrome.pageAction.show(tabId);
+    browser.pageAction.setIcon({'tabId' : tabId, 'path' : icon});
+    browser.pageAction.setTitle({'tabId' : tabId, 'title' : title});
+    browser.pageAction.show(tabId);
 }
 
 browser.pageAction.onClicked.addListener( function() {
-  chrome.runtime.openOptionsPage()
+  browser.runtime.openOptionsPage()
 });
