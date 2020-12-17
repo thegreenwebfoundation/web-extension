@@ -1,0 +1,43 @@
+{
+  "name": "web-extension",
+  "version": "0.3.0",
+  "description": "The green web foundation",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^10.1.0",
+    "nodemon": "^2.0.6",
+    "postcss": "^8.2.1",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.0",
+    "tailwindcss": "^2.0.2",
+    "web-ext": "^5.4.1",
+    "webextension-polyfill": "^0.7.0"
+  },
+  "scripts": {
+    "css:dist": "NODE_ENV=production npm run css:build",
+    "css:build": "postcss -c ../postcss.config.js ./thegreenweb/tailwind.css -o ./thegreenweb/style.css",
+    "css:watch": "postcss -c postcss.config.js ./thegreenweb/tailwind.css  -o ./thegreenweb/style.css --watch",
+    "firefox:dev": "web-ext run --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thegreenwebfoundation/web-extension.git"
+  },
+  "keywords": [
+    "browser",
+    "extensions",
+    "tgwf",
+    "sustainability",
+    "green"
+  ],
+  "author": "AJ Tetterroo, Chris Adams, and friends",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/thegreenwebfoundation/web-extension/issues"
+  },
+  "homepage": "https://github.com/thegreenwebfoundation/web-extension#readme"
+}

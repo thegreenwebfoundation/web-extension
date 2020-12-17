@@ -3,7 +3,7 @@
   "update_url":"http://clients2.google.com/service/update2/crx",
   "name": "The Green Web",
   "short_name": "The Green Web",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
     "scripts": ["background.js","thegreenweb-utils.js"],
@@ -11,12 +11,18 @@
   },
   "minimum_chrome_version" : "22",
   "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+
   "offline_enabled": false,
   "content_security_policy": "script-src 'self'; object-src 'self';",
   "icons": {
-    "16" : "/icons/16.gif",
-    "48" : "/icons/48.gif",
-    "128": "/icons/128.gif"
+    "16" : "/icons/16.png",
+    "32" : "/icons/32.png",
+    "48" : "/icons/48.png",
+    "128": "/icons/128.png"
   },
   "homepage_url": "https://www.thegreenwebfoundation.org/add-ons",
   "page_action": {
@@ -32,7 +38,8 @@
     "images/goldsmiley20x20.png",
     "images/gold20x20transp.png",
     "images/green20x20transp.png",
-    "images/grey20x20transp.png"
+    "images/grey20x20transp.png",
+    "images/top-logo-greenweb.png"
   ],
   "permissions": [
         "https://api.thegreenwebfoundation.org",

@@ -1,4 +1,11 @@
-Release notes:
+## Release notes:
+
+# 2.4.0 | 16 December 2020
+
+- Update icons to .png files to show in browsers again
+- Add link to options pages on firefox and chrome, to make it easier to switch feature on or off
+- Overhaul options page design.
+- Update options page to use vanilla js instead of jquery for the new design (it's 2020, we can use modern js now!)
 
 2.3.0 | 30 June 2020
 - New transparent icons for dark mode and better looking
@@ -27,7 +34,7 @@ Release notes:
 - Code cleanup
 
 1.7.4 | 7 Aug 2014
-- Don't underlign links to the same domain when all links is on
+- Don't underline links to the same domain when all links is on
 - Fix bing search page
 - Update jquery to 2.1.1
 

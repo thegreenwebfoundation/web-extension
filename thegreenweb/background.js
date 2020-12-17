@@ -167,3 +167,7 @@ function showIcon(resp,tabId)
     chrome.pageAction.setTitle({'tabId' : tabId, 'title' : title});
     chrome.pageAction.show(tabId);
 }
+
+browser.pageAction.onClicked.addListener( function() {
+  chrome.runtime.openOptionsPage()
+});
