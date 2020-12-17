@@ -18,6 +18,7 @@ function annotateAndFilterSearchResults(message, sender) {
 
 
       if (data[loc]) {
+
         $(this).find('.TGWF').first()
           .html(getResultNode(data[loc]))
           .qtip({
@@ -45,7 +46,6 @@ function annotateAndFilterSearchResults(message, sender) {
       }
     });
   }
-  return true;
 }
 
 chrome.runtime.onMessage.addListener(annotateAndFilterSearchResults);
@@ -62,7 +62,7 @@ $(document).ready(function () {
     const annotateSearchResults = items && items['annotate-search-results']
 
     if (!annotateSearchResults) {
-      console.debug("Green web search is disabled, returning early")
+      console.debug("Green web search annotationed are disabled, doing nothing")
       return;
     }
 
@@ -94,7 +94,9 @@ $(document).ready(function () {
     if (Object.keys(locs).length > 0) {
       console.debug("sending domains to be checked", locs)
       // send list of domains to background js
-      browser.runtime.sendMessage({ locs: locs }, function (response) { });
+      browser.runtime.sendMessage({ locs: locs });
     }
+  }).catch(function(error) {
+    console.error("Something went wrong accessing local storage", error)
   });
 });
