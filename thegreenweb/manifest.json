@@ -42,8 +42,8 @@
     "images/top-logo-greenweb.png"
   ],
   "permissions": [
-        "https://api.thegreenwebfoundation.org",
-        "https://www.thegreenwebfoundation.org",
+        "*://api.thegreenwebfoundation.org/*",
+        "*://www.thegreenwebfoundation.org/*",
         "webNavigation",
         "tabs",
         "storage"
@@ -51,6 +51,7 @@
   "content_scripts": [
    {
       "matches": [
+            "*://*.duckduckgo.com/*",
             "*://*.google.com/*",
             "*://*.google.it/*",
             "*://*.google.com.tr/*",
