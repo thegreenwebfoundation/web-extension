@@ -51,6 +51,7 @@
   "content_scripts": [
    {
       "matches": [
+            "*://*.duckduckgo.com/*",
             "*://*.google.com/*",
             "*://*.google.it/*",
             "*://*.google.com.tr/*",
