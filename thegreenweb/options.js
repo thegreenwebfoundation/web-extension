@@ -61,7 +61,8 @@ async function loadOptions() {
   let results
   try {
     results = await browser.storage.local.get(keys)
-    ack
+    const successMessage = "Your settings have been restored from the saved state."
+    acknowledgeSave(successMessage)
   } catch (error) {
     console.error(`Something went wrong fetching from the sync: ${error.message}`)
   }
