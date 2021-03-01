@@ -79,8 +79,8 @@ function updateFormSettings(results) {
 
   if (results) {
     for (const [key, value] of Object.entries(results)) {
-      // we need to *invert* these, because we store if a
-      // feture is disabled, not enabled
+      // we need to *invert* these, because we track whether
+      // a feature is disabled, not enabled*
       if (!value) {
         const switchToUpdate = mappings[key]
         input = document.querySelector(`[name='${switchToUpdate}']`)
@@ -93,8 +93,6 @@ function updateFormSettings(results) {
       }
     }
   }
-
-
 }
 
 /**
@@ -114,7 +112,7 @@ function acknowledgeSave(message) {
   setTimeout(function () {
     announcement.classList.add('opacity-100')
     announcement.classList.remove('opacity-0')
-    }, 100
+  }, 100
   )
 
 }
@@ -130,7 +128,7 @@ function dismissAlert() {
   // to wait for the fade out first
   setTimeout(function () {
     announcement.classList.add('hidden')
-    }, 100
+  }, 100
   )
 
 }
