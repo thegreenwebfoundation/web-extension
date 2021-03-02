@@ -106,9 +106,9 @@ function findAndAnnotatedSearchResults() {
     addFooter()
     // find the search results on the page, annotating each one with a question
     // mark until we have results
-    const ecosiaResults = gatherSearchLinks()
+    const searchResults = gatherSearchLinks()
     // check the domain of each result
-    const greenCheckData = await checkDomains(ecosiaResults)
+    const greenCheckData = await checkDomains(searchResults)
     // update the DOM to show the green/grey status
     console.log(greenCheckData)
     annotateAndFilterSearchResults(greenCheckData)
