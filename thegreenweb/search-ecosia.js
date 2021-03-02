@@ -66,8 +66,6 @@ function gatherSearchLinks() {
     });
     return ecosiaResults
   }
-  console.log("TGWF:search:ecosia:ecosiaResults", { locs })
-
 }
 
 function addFooter() {
