@@ -31,7 +31,8 @@ function annotateAndFilterSearchResults(data) {
         $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light' });
       }
 
-      // TODO: add the hidnig of results back in
+      // TODO: add the hiding of results back in once we have
+      // DRY'ed up the code checkers
       // // hide grey results if the filter is on
       // if (message.filter && data[loc].green === false) {
       //   // remove full result from the page

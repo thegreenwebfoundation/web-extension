@@ -27,8 +27,8 @@ async function saveOptions(event) {
     "filter-out-grey-search-results": 0,
     "check-outbound-links": 0,
   }
-  // this means we only need ti check for the existence of the key
-  // to set it as a truthy valye
+  // this means we only need to check for the existence of the key
+  // to set it as a truthy value
 
   for (const key of formSubmission.keys()) {
     if (TGWF_SETTINGS.includes(key)) {
