@@ -106,7 +106,6 @@ function findAndAnnotatedSearchResults() {
     }
     console.debug("Green web search is on")
 
-    // Remove all tgwf links
     addFooter()
 
     // find the search results on the page, annotating each one with a question
