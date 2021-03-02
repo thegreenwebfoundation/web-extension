@@ -8,7 +8,8 @@
 
 /**
  * If document is ready, find the urls to check
- */
+
+
 // accept a object of form:
 // {
 //   "www.google.com": {
@@ -21,12 +22,16 @@
 //     url: "www.google.com"
 //   }
 // }
+*/
 function annotateLinksInDom(data) {
   var currenturl = getUrl(document.URL);
-  console.log({ data })
+
+
   $("a").not('.TGWF-addon').each(function (i) {
+
     var loc = $(this).attr('href');
     var strippedurl = getUrl(loc);
+
     if (loc && strippedurl) {
 
       // this the current url, no need to annotate
@@ -60,9 +65,7 @@ function annotateLinksInDom(data) {
   });
 }
 
-
 function checkLinkDomains() {
-  console.log("CHECKINGYO")
   chrome.storage.sync.get("tgwf_all_disabled", async function (items) {
     if (items && items.tgwf_all_disabled && items.tgwf_all_disabled === "1") {
       // Green web search is disabled, return

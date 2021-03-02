@@ -7,6 +7,7 @@
   "description": "Automatically check the sustainability of a website with The Green Web add-on.",
   "background": {
     "scripts": [
+      "src/greencheck.js",
       "background.js",
       "thegreenweb-utils.js"
     ],
@@ -232,26 +233,25 @@
         "browser-polyfill.min.js",
         "thegreenweb-utils.js",
         "qtip/jquery.qtip.min.js",
-        "src/greencheck.js",
-        "green-page-links.js"
-      ]
-    },
-    {
-      "matches": [
-        "https://*/*"
-      ],
-      "css": [
-        "thegreenweb.css",
-        "qtip/jquery.qtip.min.css"
-      ],
-      "js": [
-        "jquery.min.js",
-        "browser-polyfill.min.js",
-        "thegreenweb-utils.js",
-        "qtip/jquery.qtip.min.js",
-        "src/greencheck.js",
         "green-page-links.js"
       ]
     }
+    // {
+    //   "matches": [
+    //     "https://*/*"
+    //   ],
+    //   "css": [
+    //     "thegreenweb.css",
+    //     "qtip/jquery.qtip.min.css"
+    //   ],
+    //   "js": [
+    //     "jquery.min.js",
+    //     "browser-polyfill.min.js",
+    //     "thegreenweb-utils.js",
+    //     "qtip/jquery.qtip.min.js",
+    //     "src/greencheck.js",
+    //     "green-page-links.js"
+    //   ]
+    // }
   ]
 }

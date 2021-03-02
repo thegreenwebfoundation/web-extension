@@ -8,20 +8,24 @@
 /**
  * On request, send the data to the green web api
  */
-browser.runtime.onMessage.addListener(
-  function (request, sender, sendResponse) {
-    console.debug({ sender: sender.url })
-    if (request.locs) {
-      doSearchRequest(request.locs, sender.tab);
-    }
-    // Instead of returning true, we return a promise that
-    // resolves to true, as runtime.sendMessage now uses
-    // Promises
-    return Promise.resolve(true)
+browser.runtime.onMessage.addListener(handledomainLookup);
+
+
+async function handledomainLookup(message, sender, sendResponse) {
+  console.debug({ sender: sender.url })
+  console.debug({ message })
+  if (message.locs) {
+    // doSearchRequest(request.locs, sender.tab);
+    const greenCheckData = await GreenChecker.checkBulkDomains(message.locs)
+    return Promise.resolve(greenCheckData)
   }
+  // Instead of returning true, we return a promise that
+  // resolves to true, as runtime.sendMessage now uses
+  // Promises
 
 
-);
+
+}
 
 /**
  * Attach the normal pageAction to the tabs
