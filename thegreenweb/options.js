@@ -4,42 +4,40 @@
  * @author Arend-Jan Tetteroo <aj@thegreenwebfoundation.org>
  */
 
+
+const TGWF_SETTINGS = [
+  "annotate-search-results",
+  "filter-out-grey-search-results",
+  "check-outbound-links"
+]
+
 /**
- * Saves options to Chrome storage api.
+ * Saves options using the Browser storage api.
  *
- * 0 = search enabled
- * 1 = search disabled
+ *
  */
 async function saveOptions(event) {
   event.preventDefault();
   const formSubmission = new FormData(event.target)
 
   // start with everything off, because a form submission only will contain
-  // 'checked', or 'active' switched
+  // 'checked', or 'active' switches.
   let payload = {
-    "tgwf_search_disabled": 1,
-    "tgwf_all_disabled": 1,
-    "tgwf_filter_enabled": 1
+    "annotate-search-results": 0,
+    "filter-out-grey-search-results": 0,
+    "check-outbound-links": 0,
   }
+  // this means we only need to check for the existence of the key
+  // to set it as a truthy value
 
   for (const key of formSubmission.keys()) {
-    switch (key) {
-      case "toggle-web-search":
-        payload.tgwf_search_disabled = 0
-        break;
-      case "toggle-link-check":
-        payload.tgwf_all_disabled = 0
-        break;
-      case "toggle-ethical-filter":
-        payload.tgwf_filter_enabled = 0
-        break;
-      default:
-        break;
+    if (TGWF_SETTINGS.includes(key)) {
+      payload[key] = 1
     }
   }
   try {
     //  an empty promise is returned by the storage API, so there's nothing
-    // to return or inspect
+    // to return or inspect when we call set()
     await browser.storage.local.set(payload)
     const successMessage = "Your settings have been saved. If you have any search pages open you will need to reload them to see the changes."
     acknowledgeSave(successMessage)
@@ -53,49 +51,37 @@ async function saveOptions(event) {
  * include them
  */
 async function loadOptions() {
-  const keys = [
-    "tgwf_search_disabled",
-    "tgwf_all_disabled",
-    "tgwf_filter_enabled"
-  ]
   let results
   try {
-    results = await browser.storage.local.get(keys)
-    const successMessage = "Your settings have been restored from the saved state."
-    acknowledgeSave(successMessage)
+    results = await browser.storage.local.get(TGWF_SETTINGS)
+
   } catch (error) {
     console.error(`Something went wrong fetching from the sync: ${error.message}`)
   }
   return results
 }
 
+
 function updateFormSettings(results) {
 
-  const mappings = {
-    "tgwf_search_disabled": "toggle-web-search",
-    "tgwf_all_disabled": "toggle-link-check",
-    "tgwf_filter_enabled": "toggle-ethical-filter"
-  }
+
   console.log(results)
 
   if (results) {
+
+    // clear out inputs
+    const inputs = document.querySelectorAll('form.tgwf-settings input')
+    for (input of inputs) {
+      input.checked = false
+    }
+
     for (const [key, value] of Object.entries(results)) {
-      // we need to *invert* these, because we store if a
-      // feture is disabled, not enabled
-      if (!value) {
-        const switchToUpdate = mappings[key]
-        input = document.querySelector(`[name='${switchToUpdate}']`)
-        input.checked = true
-      }
       if (value) {
-        const switchToUpdate = mappings[key]
-        input = document.querySelector(`[name='${switchToUpdate}']`)
-        input.checked = false
+        input = document.querySelector(`[name='${key}']`)
+        input.checked = true
       }
     }
   }
-
-
 }
 
 /**
@@ -115,7 +101,7 @@ function acknowledgeSave(message) {
   setTimeout(function () {
     announcement.classList.add('opacity-100')
     announcement.classList.remove('opacity-0')
-    }, 100
+  }, 100
   )
 
 }
@@ -131,7 +117,7 @@ function dismissAlert() {
   // to wait for the fade out first
   setTimeout(function () {
     announcement.classList.add('hidden')
-    }, 100
+  }, 100
   )
 
 }
