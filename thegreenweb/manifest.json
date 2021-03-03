@@ -42,7 +42,9 @@
   "permissions": [
     "webNavigation",
     "tabs",
-    "storage"
+    "storage",
+    "https://api.thegreenwebfoundation.org",
+    "https://www.thegreenwebfoundation.org"
   ],
   "content_scripts": [
     {

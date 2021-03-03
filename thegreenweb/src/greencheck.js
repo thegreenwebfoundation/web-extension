@@ -23,20 +23,27 @@ const GreenChecker = {
     console.debug(`TGWF:GreenChecker: making request for ${sites.length} sites`)
     const requestUrl = `${apiHostName}${urlencodedSites}`
 
-    // content scripts have different permissions we need to account for
+    // content scripts now have different permissions. We need to serve a CORS header
+    // for this to work in Chromium based browsers.
+    // Firefox *can* still make cross domain requests by explcitly listing the
+    // domains you intend makr requests to, and using content.fetch(), instead of
+    // regular fetch.
+    // Other browsers do not have this API available tho, and listing domains in the
+    // perms causes validation errors for Chrome
     // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts#xhr_and_fetch
-    // for firefox
+
     let res = null
     function checkForFireFoxContentFetch() {
       return (typeof content === "object") && (typeof content.fetch === "function")
     }
+
     const looksLikeFireFox = checkForFireFoxContentFetch()
 
     if (looksLikeFireFox) {
-      console.debug("Using the Firefox content.fetch, to avoid the CORS error")
+      console.debug("Using the Firefox content.fetch")
       res = await content.fetch(requestUrl)
     } else {
-      console.debug("Looks like not-Firefox using the regular fetch")
+      console.debug("Trying the regular fetch. YOLO.")
       res = await fetch(requestUrl)
     }
     const domainCheckResults = await res.json()
