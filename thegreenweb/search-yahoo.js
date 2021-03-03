@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill"
 /*
  * Yahoo search pagemod functions
  *
