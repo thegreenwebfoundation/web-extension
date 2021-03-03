@@ -1,3 +1,4 @@
+import $ from 'jquery'
 /**
  * Utilities for the greenweb add-on
  *
@@ -8,15 +9,14 @@
 /**
  * Get the url from the given location
  */
-function getUrl(loc)
-{
-    loc = this.stripProtocolFromUrl(loc);
+function getUrl(loc) {
+    loc = stripProtocolFromUrl(loc);
     if (loc === false) {
         return false;
     }
-    loc = this.stripQueryStringFromUrl(loc);
-    loc = this.stripPageFromUrl(loc);
-    loc = this.stripPortFromUrl(loc);
+    loc = stripQueryStringFromUrl(loc);
+    loc = stripPageFromUrl(loc);
+    loc = stripPortFromUrl(loc);
 
     // Don't lookup localhost
     if (loc === 'localhost') {
@@ -30,18 +30,17 @@ function getUrl(loc)
  * Strip the protocol from the location
  * If no http or https given, then return false
  */
-function stripProtocolFromUrl(loc)
-{
+function stripProtocolFromUrl(loc) {
     if (loc === undefined) {
         return false;
     }
 
-    var prot = loc.substring(0,5);
-    if(prot === 'http:'){
+    var prot = loc.substring(0, 5);
+    if (prot === 'http:') {
         return loc.substring(7);
     }
 
-    if(prot === 'https'){
+    if (prot === 'https') {
         return loc.substring(8);
     }
 
@@ -52,8 +51,7 @@ function stripProtocolFromUrl(loc)
 /**
  * Only use the domain.tld, not the querystring behind ? or #
  */
-function stripQueryStringFromUrl(loc)
-{
+function stripQueryStringFromUrl(loc) {
     var temp = loc.split('?');
     loc = temp[0];
     temp = loc.split('#');
@@ -64,8 +62,7 @@ function stripQueryStringFromUrl(loc)
 /**
  * Only use the domain.tld, not the page
  */
-function stripPageFromUrl(loc)
-{
+function stripPageFromUrl(loc) {
     var temp = loc.split('/');
     loc = temp[0];
     return loc;
@@ -74,8 +71,7 @@ function stripPageFromUrl(loc)
 /**
  * Only use the domain.tld, not the port
  */
-function stripPortFromUrl(loc)
-{
+function stripPortFromUrl(loc) {
     var temp = loc.split(':');
     loc = temp[0];
     return loc;
@@ -84,16 +80,15 @@ function stripPortFromUrl(loc)
 /**
  * Get the image with a cleanbits link around it as a jquery node
  */
-function getGreenwebLinkNode(color, tooltip)
-{
+function getGreenwebLinkNode(color, tooltip) {
     var aItem = document.createElement("a");
-    aItem.href  = 'https://www.thegreenwebfoundation.org';
+    aItem.href = 'https://www.thegreenwebfoundation.org';
     aItem.class = 'TGWF-addon';
     aItem.title = tooltip;
 
     var imageItem = document.createElement("img");
     imageItem.src = getImagePath(color);
-    imageItem.style= 'width:16px; height:16px;border:none;';
+    imageItem.style = 'width:16px; height:16px;border:none;';
     aItem.appendChild(imageItem);
 
     return aItem;
@@ -104,13 +99,12 @@ function getGreenwebLinkNode(color, tooltip)
  *
  * @returns {HTMLParagraphElement}
  */
-function getFooterElement()
-{
+function getFooterElement() {
     var greenWebEnabledItem = document.createElement("p");
     greenWebEnabledItem.id = 'thegreenweb';
     greenWebEnabledItem.style = 'text-align:center;';
 
-    var image = getGreenwebLinkNode('green','The Green Web extension shows if a site is sustainably hosted');
+    var image = getGreenwebLinkNode('green', 'The Green Web extension shows if a site is sustainably hosted');
     var spanItem = document.createElement('span');
     spanItem.id = 'thegreenwebenabled';
 
@@ -127,16 +121,15 @@ function getFooterElement()
  * @param color
  * @returns {void | * | jQuery}
  */
-function getLinkNode(color, type)
-{
+function getLinkNode(color, type) {
     var style = 'width:16px; height:16px;border:none;';
-    if(type === 'google') {
+    if (type === 'google') {
         style = 'width:16px; height:16px;border:none; margin-left:-20px; margin-top:2px';
     }
 
     var href = 'https://www.thegreenwebfoundation.org';
     return $("<a>", { href: href, class: 'TGWF-addon' })
-                 .append($('<img>', { src: getImagePath(color), style: style   } ));
+        .append($('<img>', { src: getImagePath(color), style: style }));
 }
 
 /**
@@ -145,34 +138,32 @@ function getLinkNode(color, type)
  * @param color
  * @returns {*|jQuery|HTMLElement}
  */
-function getImageNode(color)
-{
-    return $('<img>', { style: 'width:16px; height:16px;border:none;', src: getImagePath(color)});
+function getImageNode(color) {
+    return $('<img>', { style: 'width:16px; height:16px;border:none;', src: getImagePath(color) });
 }
 
 /**
  * Get the image path based on file
  */
-function getImagePath(file, local)
-{
+function getImagePath(file, local) {
     var icons = {};
-    icons.green         = chrome.runtime.getURL("/images/green20x20transp.png");
-    icons.grey          = chrome.runtime.getURL("/images/grey20x20transp.png");
+    icons.green = chrome.runtime.getURL("/images/green20x20transp.png");
+    icons.grey = chrome.runtime.getURL("/images/grey20x20transp.png");
     icons.greenquestion = chrome.runtime.getURL("/images/question20x20transp.png");
-    icons.greenfan      = chrome.runtime.getURL("/images/greenfan20x20transp.png");
-    icons.greenhouse    = chrome.runtime.getURL("/images/greenhouse20x20transp.png");
-    icons.goldsmiley    = chrome.runtime.getURL("/images/gold20x20transp.png");
+    icons.greenfan = chrome.runtime.getURL("/images/greenfan20x20transp.png");
+    icons.greenhouse = chrome.runtime.getURL("/images/greenhouse20x20transp.png");
+    icons.goldsmiley = chrome.runtime.getURL("/images/gold20x20transp.png");
 
-     if (icons[file]) {
+    if (icons[file]) {
         return icons[file];
     }
 
-     if (local) {
-         return chrome.runtime.getURL("/images/green20x20.gif");
-     }
+    if (local) {
+        return chrome.runtime.getURL("/images/green20x20.gif");
+    }
 
     // if the file has http as it's start, it's a full url to a web icon somewhere else, so then return that.
-    var prot = file.substring(0,4);
+    var prot = file.substring(0, 4);
     if (prot === 'http') {
         return file;
     }
@@ -183,19 +174,17 @@ function getImagePath(file, local)
 /**
  * Get the resulting image from the data as jquery dom node
  */
-function getResultNode(data, type)
-{
+function getResultNode(data, type) {
     return getLinkNode(getIcon(data), type);
 }
 
 /**
  * Get the icon based on the data
  */
-function getIcon(data)
-{
+function getIcon(data) {
     if (data.green) {
         // Green
-        if(data.icon) {
+        if (data.icon) {
             // Special icon
             return data.icon;
         }
@@ -212,11 +201,10 @@ function getIcon(data)
 /**
  * Get the title based on the data
  */
-function getTitle(data)
-{
-    if(data.green) {
+function getTitle(data) {
+    if (data.green) {
         // Green
-        if(data.hostedby){
+        if (data.hostedby) {
             // We know the hoster, show it
             return 'Sustainably hosted by ' + data.hostedby;
         }
@@ -236,8 +224,7 @@ function getTitle(data)
 /**
  * Get the title based on the data
  */
-function getTitleWithLink(data)
-{
+function getTitleWithLink(data) {
     if (!data) {
         return '';
     }
@@ -250,9 +237,26 @@ function getTitleWithLink(data)
 
     if (data.data === false) {
         // No data available, show help message
-        return "No data available yet for this country domain. Wanna help? Contact us through "  + " <a target=\'_blank\' href=\'https://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
+        return "No data available yet for this country domain. Wanna help? Contact us through " + " <a target=\'_blank\' href=\'https://www.thegreenwebfoundation.org\'>www.thegreenwebfoundation.org</a>";
     }
 
     // Data available, so show grey site
     return data.url + ' ' + ' is hosted grey';
+}
+
+export {
+    getUrl,
+    stripProtocolFromUrl,
+    stripQueryStringFromUrl,
+    stripPageFromUrl,
+    stripPortFromUrl,
+    getGreenwebLinkNode,
+    getFooterElement,
+    getLinkNode,
+    getImageNode,
+    getImagePath,
+    getResultNode,
+    getIcon,
+    getTitle,
+    getTitleWithLink,
 }

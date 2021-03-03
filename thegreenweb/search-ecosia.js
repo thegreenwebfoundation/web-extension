@@ -1,3 +1,7 @@
+import $ from 'jquery'
+import browser from "webextension-polyfill"
+import tippy from 'tippy.js';
+import { getUrl, getResultNode, getTitleWithLink, getImageNode, getFooterElement } from './thegreenweb-utils'
 /*
  * Ecosia search pagemod functions (Based on bing search)
  *
@@ -15,32 +19,47 @@ function annotateAndFilterSearchResults(data) {
 
     if (data[loc]) {
 
-      $(this).find('.TGWF').first()
-        .html(getResultNode(data[loc]))
-        .qtip({
-          content: {
-            text: function (api) {
-              return getTitleWithLink(data[loc]);
-            }
-          },
-          show: { delay: 700 },
-          hide: { fixed: true, delay: 500 }
-        });
+      const greenlink = $(this).find('.TGWF').first()
 
+      // replace with text, prepending our green/grey smiley
+      greenlink.html(getResultNode(data[loc]))
 
-      if (data[loc].green) {
-        $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green' });
-      } else {
-        $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light' });
-      }
-
-      // remove link if it's not green and we have filtering enabled
-      // if (message.filter && data[loc].green === false) {
-      //   // remove full result from the page
-      //   $(this).hide();
-      // }
+      // add the tooltip to the link
+      addToolTip(greenlink)
     }
   });
+}
+
+/**
+ * Accept a tooltip, and add tooltip behaviour, that was provided by jquery qtip
+ * @param  {} elem
+ */
+function addToolTip(elem) {
+
+  // TODO: replace this code, obvs
+
+  // .qtip({
+  //   content: {
+  //     text: function (api) {
+  //       return getTitleWithLink(data[loc]);
+  //     }
+  //   },
+  //   show: { delay: 700 },
+  //   hide: { fixed: true, delay: 500 }
+  // });
+
+
+  // if (data[loc].green) {
+  //   $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-green' });
+  // } else {
+  //   $(this).find('.TGWF').first().qtip('option', { 'style.classes': 'qtip-light' });
+  // }
+
+  // remove link if it's not green and we have filtering enabled
+  // if (message.filter && data[loc].green === false) {
+  //   // remove full result from the page
+  //   $(this).hide();
+  // }
 }
 
 function gatherSearchLinks() {
@@ -89,7 +108,11 @@ async function checkDomains(locs) {
 function findAndAnnotatedSearchResults() {
   console.debug("TGWF:search:ecosia:ready")
 
-  browser.storage.local.get("annotate-search-results", async function (items) {
+  // TODO: try/catch this
+  let items = null;
+  async function checkSettings() {
+    items = await browser.storage.local.get("annotate-search-results")
+
     const annotateSearchResults = items && items['annotate-search-results']
 
     if (!annotateSearchResults) {
@@ -110,7 +133,12 @@ function findAndAnnotatedSearchResults() {
     // update the DOM to show the green/grey status
     console.log(greenCheckData)
     annotateAndFilterSearchResults(greenCheckData)
-  })
+  }
+
+  //
+  checkSettings()
+
+
 
 }
 
@@ -118,4 +146,4 @@ function findAndAnnotatedSearchResults() {
  * If document is ready, find the urls to check
  */
 console.debug("TGWF:search:ecosia:loading")
-$(document).ready(findAndAnnotatedSearchResults);
+$(findAndAnnotatedSearchResults);

@@ -1,3 +1,22 @@
+import browser from "webextension-polyfill"
+import {
+  getUrl,
+  stripProtocolFromUrl,
+  stripQueryStringFromUrl,
+  stripPageFromUrl,
+  stripPortFromUrl,
+  getGreenwebLinkNode,
+  getFooterElement,
+  getLinkNode,
+  getImageNode,
+  getImagePath,
+  getResultNode,
+  getIcon,
+  getTitle,
+  getTitleWithLink,
+} from './thegreenweb-utils'
+import { GreenChecker } from './src/greencheck'
+
 /*
  * Chrome functions for The Green Web addon
  *
@@ -8,7 +27,7 @@
 /**
  * On request, send the data to the green web api
  */
-browser.runtime.onMessage.addListener(handledomainLookup);
+
 
 
 async function handledomainLookup(message, sender, sendResponse) {
@@ -26,13 +45,14 @@ async function handledomainLookup(message, sender, sendResponse) {
 
 
 }
-
+browser.runtime.onMessage.addListener(handledomainLookup);
 /**
  * Attach the normal pageAction to the tabs
  */
 function doGreencheckForTabReplace(details) {
-  var tabId = details.tabId;
-  browser.tabs.get(tabId, function (tab) {
+  let tabId = details.tabId;
+  let chosenTab = browser.tabs.get(tabId)
+  chosenTab.then(function (tab) {
     if (tab && tab.url) {
       var url = tab.url;
       tabId = tab.id;
@@ -44,8 +64,7 @@ function doGreencheckForTabReplace(details) {
         }
       }
     }
-  }
-  );
+  })
 }
 
 browser.webNavigation.onCommitted.addListener(function (details) {
