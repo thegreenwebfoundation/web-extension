@@ -72,13 +72,13 @@ function updateFormSettings(results) {
 
     // clear out inputs
     const inputs = document.querySelectorAll('form.tgwf-settings input')
-    for (input of inputs) {
+    for (const input of inputs) {
       input.checked = false
     }
 
     for (const [key, value] of Object.entries(results)) {
       if (value) {
-        input = document.querySelector(`[name='${key}']`)
+        const input = document.querySelector(`[name='${key}']`)
         input.checked = true
       }
     }
