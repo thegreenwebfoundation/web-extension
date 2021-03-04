@@ -1,6 +1,28 @@
 
 const GreenChecker = {
 
+  /**
+   * Accept am object, domains, keyed by domains,
+   * and domainCheckResults, an arrat of Domain objects
+  */
+  buildReturnPayload(domains, domainCheckResults) {
+
+    // make our grey domainObjects
+    const checkedDomains = {}
+    for (const domain of Object.keys(domains)) {
+      checkedDomains[domain] = {
+        green: false,
+        url: domain,
+        data: true
+      }
+    }
+    // then update grey list with the green results
+    for (const domainCheck of domainCheckResults) {
+      checkedDomains[domainCheck.url] = domainCheck
+    }
+    return checkedDomains
+  },
+
   checkBulkDomains: async function (domains, options) {
     let apiHostName = "https://admin.thegreenwebfoundation.org/api/v3/greencheck/"
     // let apiHostName = "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"
@@ -26,23 +48,9 @@ const GreenChecker = {
 
     const res = await fetch(requestUrl)
     const domainCheckResults = await res.json()
-
-    // make our grey domainObjects
-    const checkedDomains = {}
-    for (const domain of Object.keys(domains)) {
-      checkedDomains[domain] = {
-        green: false,
-        url: domain,
-        data: true
-      }
-    }
-    // then update grey list with the green results
-    for (const domainCheck of domainCheckResults) {
-      checkedDomains[domainCheck.url] = domainCheck
-    }
-
     console.debug(`TGWF:GreenChecker: got back ${domainCheckResults.length} responses`)
-    return checkedDomains
+
+    return this.buildReturnPayload(domains, domainCheckResults)
   }
 }
 
