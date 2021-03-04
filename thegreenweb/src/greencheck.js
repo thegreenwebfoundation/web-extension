@@ -2,7 +2,8 @@
 const GreenChecker = {
 
   checkBulkDomains: async function (domains, options) {
-    let apiHostName = "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"
+    let apiHostName = "https://admin.thegreenwebfoundation.org/api/v3/greencheck/"
+    // let apiHostName = "https://api.thegreenwebfoundation.org/v2/greencheckmulti/"
 
     // optional override
     if (options && options.apiHost) {
@@ -16,40 +17,35 @@ const GreenChecker = {
       return false
     }
 
-    // TODO fetch sites in groups of 50 to send a batch
-    // request to the API
     const sites = Object.getOwnPropertyNames(domains).splice(0, 50);
-    const urlencodedSites = JSON.stringify(sites);
+    // make comma separate list
+    const urlencodedSites = Object.keys(domains).join(',')
+
     console.debug(`TGWF:GreenChecker: making request for ${sites.length} sites`)
-    const requestUrl = `${apiHostName}${urlencodedSites}`
+    const requestUrl = `${apiHostName}?urls=${urlencodedSites}`
 
-    // content scripts now have different permissions. We need to serve a CORS header
-    // for this to work in Chromium based browsers.
-    // Firefox *can* still make cross domain requests by explcitly listing the
-    // domains you intend makr requests to, and using content.fetch(), instead of
-    // regular fetch.
-    // Other browsers do not have this API available tho, and listing domains in the
-    // perms causes validation errors for Chrome
-    // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts#xhr_and_fetch
-
-    let res = null
-    function checkForFireFoxContentFetch() {
-      return (typeof content === "object") && (typeof content.fetch === "function")
-    }
-
-    const looksLikeFireFox = checkForFireFoxContentFetch()
-
-    if (looksLikeFireFox) {
-      console.debug("Using the Firefox content.fetch")
-      res = await content.fetch(requestUrl)
-    } else {
-      console.debug("Trying the regular fetch. YOLO.")
-      res = await fetch(requestUrl)
-    }
+    const res = await fetch(requestUrl)
     const domainCheckResults = await res.json()
 
+    // make our grey domainObjects
+    const checkedDomains = {}
+    for (const domain of Object.keys(domains)) {
+      checkedDomains[domain] = {
+        green: false,
+        url: domain,
+        data: true
+      }
+    }
+
+    for (const domainCheck of domainCheckResults) {
+      console.log(domainCheck)
+      console.log(domainCheck.url)
+      checkedDomains[domainCheck.url] = domainCheck
+    }
+
     console.debug(`TGWF:GreenChecker: got back ${domainCheckResults.length} responses`)
-    return domainCheckResults
+    console.log({ checkedDomains })
+    return checkedDomains
   }
 }
 
