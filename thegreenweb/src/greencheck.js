@@ -18,7 +18,7 @@ const GreenChecker = {
     }
 
     const sites = Object.getOwnPropertyNames(domains).splice(0, 50);
-    // make comma separate list
+    // make comma separated list
     const urlencodedSites = Object.keys(domains).join(',')
 
     console.debug(`TGWF:GreenChecker: making request for ${sites.length} sites`)
@@ -36,15 +36,12 @@ const GreenChecker = {
         data: true
       }
     }
-
+    // then update grey list with the green results
     for (const domainCheck of domainCheckResults) {
-      console.log(domainCheck)
-      console.log(domainCheck.url)
       checkedDomains[domainCheck.url] = domainCheck
     }
 
     console.debug(`TGWF:GreenChecker: got back ${domainCheckResults.length} responses`)
-    console.log({ checkedDomains })
     return checkedDomains
   }
 }
