@@ -14,7 +14,7 @@ import { getUrl, getResultNode, getTitleWithLink, getImageNode, getFooterElement
 function annotateAndFilterSearchResults(data) {
   console.log("TGWF:search:ecosia:annotateAndFilterSearchResults")
 
-  $(".result").each(function () {
+  $(".result").not('.card-relatedsearches .result').each(function () {
     var loc = getUrl($(this).find('a').first().attr('href'));
 
     if (data[loc]) {
@@ -70,7 +70,7 @@ function gatherSearchLinks() {
     // Remove all tgwf links
     $('.TGWF').remove();
 
-    $(".result").each(function (i) {
+    $(".result").not('.card-relatedsearches .result').each(function (i) {
 
       // add question mark, while we wait for a response for our greencheck
       $(this).find('a').first().prepend($('<span>', { class: 'TGWF' }).append(getImageNode('greenquestion')).append('&nbsp;'));
@@ -78,7 +78,9 @@ function gatherSearchLinks() {
       // make a note of the link, to pull out the domain
       var loc = getUrl($(this).find('a').first().attr('href'));
 
+
       //  any check to avoid sending a domain named 'false' to the API
+
       if (loc != false) {
         ecosiaResults[loc] = loc;
       }
