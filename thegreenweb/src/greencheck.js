@@ -48,6 +48,7 @@ const GreenChecker = {
 
     const res = await fetch(requestUrl)
     const domainCheckResults = await res.json()
+
     console.debug(`TGWF:GreenChecker: got back ${domainCheckResults.length} responses`)
 
     return this.buildReturnPayload(domains, domainCheckResults)
