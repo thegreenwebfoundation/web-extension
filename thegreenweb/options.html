@@ -23,12 +23,12 @@
 
 					<div class="py-3 flex">
 						<div class="flex-grow">
-							<h3 class="text-xl">The Green Web Search:</h3>
+							<h3 class="text-xl">Highlight Green Search Results:</h3>
 						</div>
 
 						<div class="toggle-search">
 							<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-								<input type="checkbox" name="toggle-web-search" id="toggle-web-search"
+								<input type="checkbox" name="annotate-search-results" id="toggle-web-search"
 									class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
 								<label for="toggle"
 									class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -58,7 +58,7 @@
 
 						<div class="toggle-search">
 							<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-								<input type="checkbox" name="toggle-ethical-filter" id="toggle-ethical-filter"
+								<input type="checkbox" name="filter-out-grey-search-results"
 									class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
 								<label for="toggle"
 									class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -86,7 +86,7 @@
 
 						<div class="toggle-search">
 							<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-								<input type="checkbox" name="toggle-link-check" id="toggle-link-check"
+								<input type="checkbox" name="check-outbound-links"
 									class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
 								<label for="toggle"
 									class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -143,8 +143,8 @@
 			</form>
 		</div>
 
-		<script src='browser-polyfill.min.js'></script>
-		<script src='options.js'></script>
+		
+		<script src='options.dist.js'></script>
 </body>
 
 </html>

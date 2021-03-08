@@ -9,3 +9,5 @@ node_modules
 
 # this is auto generated with tailwind now
 style.css
+dist
+*.dist.js
