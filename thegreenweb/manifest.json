@@ -25,7 +25,7 @@
     "48": "/icons/48.png",
     "128": "/icons/128.png"
   },
-  "homepage_url": "https://www.thegreenwebfoundation.org/add-ons",
+  "homepage_url": "https://www.thegreenwebfoundation.org/#the-green-web-app",
   "page_action": {
     "default_icon": {
       "16": "icon.png"
