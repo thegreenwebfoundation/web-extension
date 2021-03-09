@@ -10,10 +10,14 @@
       "background.dist.js"
     ]
   },
+                                  
+                                 
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
   },
+
+                           
   "content_security_policy": "script-src 'self'; object-src 'self';",
   "icons": {
     "16": "/icons/16.png",
@@ -21,7 +25,7 @@
     "48": "/icons/48.png",
     "128": "/icons/128.png"
   },
-  "homepage_url": "https://www.thegreenwebfoundation.org/add-ons",
+  "homepage_url": "https://www.thegreenwebfoundation.org/#the-green-web-app",
   "page_action": {
     "default_icon": {
       "16": "icon.png"
@@ -42,6 +46,8 @@
     "images/top-logo-greenweb.png"
   ],
   "permissions": [
+                                                                                                            
+                                                                                                            
     "webNavigation",
     "tabs",
     "storage",
@@ -176,6 +182,8 @@
       "js": [
         "search-google.dist.js"
       ]
+                                                                                                
+                                                                                                 
     },
     {
       "matches": [
