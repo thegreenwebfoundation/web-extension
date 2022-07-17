@@ -1,19 +1,9 @@
 import browser from "webextension-polyfill"
 import {
   getUrl,
-  stripProtocolFromUrl,
-  stripQueryStringFromUrl,
-  stripPageFromUrl,
-  stripPortFromUrl,
-  getGreenwebLinkNode,
-  getFooterElement,
-  getLinkNode,
-  getImageNode,
   getImagePath,
-  getResultNode,
   getIcon,
   getTitle,
-  getTitleWithLink,
 } from './thegreenweb-utils'
 import { GreenChecker } from './src/greencheck'
 
@@ -204,4 +194,20 @@ function showIcon(resp, tabId) {
 
 browser.pageAction.onClicked.addListener(function () {
   browser.runtime.openOptionsPage()
+});
+
+
+browser.runtime.onInstalled.addListener((details) => {
+  console.log("NEW INSTALL")
+  console.log({ details })
+  switch (details.reason) {
+    case "install":
+      // show installation onboarding page
+      browser.tabs.create({
+        url: browser.runtime.getURL("/installation.html"),
+        active: true
+      });
+      break;
+  }
+
 });
